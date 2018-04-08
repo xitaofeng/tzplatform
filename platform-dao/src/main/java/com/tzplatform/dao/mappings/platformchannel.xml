@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.channel.PlatFormChannelDao">
+
+
+    <select id="channelRootList" parameterType="PlatFormChannel" resultType="PlatFormChannel">
+        select * from platform_channel where 1=1 and parentid is null  order by sort
+    </select>
+
+    <select id="channelRootListCount" parameterType="PlatFormChannel" resultType="int">
+        select count(id) from platform_channel where 1=1 and parentid is null
+    </select>
+
+
+    <select id="channelList" parameterType="PlatFormChannel" resultType="PlatFormChannel">
+        select * from platform_channel where 1=1
+        <if test="null != id and ''!= id">
+            and id=#{id}
+        </if>
+        <if test="null != parentid and ''!= parentid">
+            and parentid=#{parentid}
+        </if>
+        <if test="null != name and ''!= name">
+            and name=#{name}
+        </if>
+        <if test="null != status and ''!= status">
+            and status=#{status}
+        </if>
+        order by sort
+    </select>
+
+    <select id="channelListCount" parameterType="PlatFormChannel" resultType="int">
+        select count(id) from platform_channel where 1=1
+        <if test="null != id and ''!= id">
+            and id=#{id}
+        </if>
+        <if test="null != parentid and ''!= parentid">
+            and parentid=#{parentid}
+        </if>
+        <if test="null != name and ''!= name">
+            and name=#{name}
+        </if>
+        <if test="null != status and ''!= status">
+            and status=#{status}
+        </if>
+    </select>
+
+    <insert id="addChannel" parameterType="PlatFormChannel">
+        insert into platform_channel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != id and ''!= id">
+                id,
+            </if>
+            <if test="null != parentid and ''!= parentid">
+                parentid,
+            </if>
+            <if test="null != name and ''!= name">
+                name,
+            </if>
+            <if test="null != type and ''!= type">
+                type,
+            </if>
+            <if test="null != status and ''!= status">
+                status,
+            </if>
+            <if test="null != sort and ''!= sort">
+                sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=parentid and ''!=parentid">
+                #{parentid},
+            </if>
+            <if test="null !=name and ''!=name">
+                #{name},
+            </if>
+            <if test="null !=type and ''!=type">
+                #{type},
+            </if>
+            <if test="null !=status and ''!=status">
+                #{status},
+            </if>
+            <if test="null !=sort and ''!=sort">
+                #{sort},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="editChannel" parameterType="PlatFormChannel">
+        update platform_channel
+        <set>
+            <if test="null !=parentid and ''!=parentid">
+                parentid=#{parentid},
+            </if>
+            <if test="null !=name and ''!=name">
+                name=#{name},
+            </if>
+            <if test="null !=type and ''!=type">
+                type=#{type},
+            </if>
+            <if test="null !=status and ''!=status">
+                status=#{status},
+            </if>
+            <if test="null !=sort and ''!=sort">
+                sort=#{sort},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delChannel" parameterType="PlatFormChannel">
+        delete from  platform_channel where id=#{id}
+    </delete>
+
+</mapper>

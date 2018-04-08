@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.mobileplatform.PlatFormCommonDao">
+
+    <select id="queryUserRole" resultType="String">
+        select  listagg(r.rolecode,',')within group (order by r.rolecode)name
+        from platform_users u, platform_userrole ur, platform_role r
+        where u.id = ur.userid
+        and ur.roleid = r.id
+        and u.account = #{accountId}
+    </select>
+
+    <select id="userSchoolId" resultType="String">
+        select  schoolid
+          from platform_mobile_user mu
+         where mu.account = #{accountId}
+</select>
+</mapper>

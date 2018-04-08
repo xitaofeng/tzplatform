@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.webapp.PlatFormWebAppDao">
+
+    <resultMap type="PlatFormWebApp" id="BaseObjectMap">
+        <result property="id" column="id"/>
+        <result property="webappid" column="webappid"/>
+        <result property="webappsecret" column="webappsecret"/>
+        <result property="freestatus" column="freestatus"/>
+        <result property="webappdevuser" column="webappdevuser"/>
+        <result property="webappname" column="webappname"/>
+        <result property="webappenname" column="webappenname"/>
+        <result property="webapptype" column="webapptype"/>
+        <result property="webappkind" column="webappkind"/>
+        <result property="webapppicsmall" column="webapppicsmall" jdbcType="BLOB"/>
+        <result property="webapppic" column="webapppic" jdbcType="BLOB"/>
+        <result property="webappstatus" column="webappstatus"/>
+        <result property="webappwebsite" column="webappwebsite"/>
+        <result property="webappwebsitewh" column="webappwebsitewh"/>
+        <result property="webappversion" column="webappversion"/>
+        <result property="webappversionname" column="webappversionname"/>
+        <result property="webappoauth" column="webappoauth"/>
+        <result property="webappsso" column="webappsso"/>
+        <result property="webappscope" column="webappscope"/>
+        <result property="webappregisterinfo" column="webappregisterinfo" jdbcType="BLOB"/>
+        <result property="webappos" column="webappos"/>
+        <result property="webappshowtype" column="webappshowtype"/>
+        <result property="webappinstallurl" column="webappinstallurl"/>
+        <result property="webappinstallorcode" column="webappinstallorcode" jdbcType="BLOB"/>
+        <result property="webappsize" column="webappsize"/>
+        <result property="createtime" column="createtime"/>
+        <result property="updatetime" column="updatetime"/>
+        <result property="handleuser" column="handleuser"/>
+        <result property="kindname" column="kindname"/>
+        <result property="kindvalue" column="kindvalue"/>
+    </resultMap>
+    <resultMap id="PlatFormAppCommentMap" type="PlatFormAppComment">
+        <result property="id" column="id"></result>
+        <result property="appid" column="appid"></result>
+        <result property="commenttype" column="commenttype"></result>
+        <result property="commentcontent" column="commentcontent"></result>
+        <result property="commentuser" column="commentuser"></result>
+        <result property="commentstart" column="commentstart"></result>
+        <result property="createtime" column="createtime" jdbcType="TIMESTAMP"></result>
+        <result property="updatetime" column="updatetime" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+
+    <insert id="addWebApp" parameterType="PlatFormWebApp">
+        insert into platform_webapplication
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                id,
+            </if>
+            <if test="null !=webappid and '' !=webappid">
+                webappid,
+            </if>
+            <if test="null !=webappsecret and '' !=webappsecret">
+                webappsecret,
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                freestatus,
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                webappdevuser,
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                webappname,
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                webappenname,
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                webapptype,
+            </if>
+            <if test="null !=webapppicsmall">
+                webapppicsmall,
+            </if>
+            <if test="null !=picsmallpath and '' !=picsmallpath">
+                picsmallpath,
+            </if>
+            <if test="null !=webapppic">
+                webapppic,
+            </if>
+            <if test="null !=picpath and '' !=picpath">
+                picpath,
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                webappstatus,
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                webappwebsite,
+            </if>
+            <if test="null !=webappwebsitewh and '' !=webappwebsitewh">
+                webappwebsitewh,
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                webappversion,
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                webappversionname,
+            </if>
+            <if test="null !=webappoauth and '' !=webappoauth">
+                webappoauth,
+            </if>
+            <if test="null !=webappsso and '' !=webappsso">
+                webappsso,
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                webappscope,
+            </if>
+            <if test="null !=webappregisterinfo">
+                webappregisterinfo,
+            </if>
+            <if test="null !=regestinfopath and '' !=regestinfopath">
+                regestinfopath,
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                webappos,
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                webappshowtype,
+            </if>
+            <if test="null !=webappinstallurl and '' !=webappinstallurl">
+                webappinstallurl,
+            </if>
+            <if test="null !=webappinstallorcode">
+                webappinstallorcode,
+            </if>
+            <if test="null !=orcodepath and '' !=orcodepath">
+                orcodepath,
+            </if>
+            <if test="null !=webappsize and '' !=webappsize">
+                webappsize,
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                handleuser,
+            </if>
+            <if test="null !=createtime">
+                createtime,
+            </if>
+            <if test="null !=updatetime">
+                updatetime,
+            </if>
+            <if test="null !=webappkind and '' !=webappkind">
+                webappkind,
+            </if>
+            <if test="null !=webappip and '' !=webappip">
+                webappip,
+            </if>
+            <if test="null !=freeuse and '' !=freeuse">
+                freeuse,
+            </if>
+            <if test="null !=appOperationUrl and ''!=appOperationUrl">
+                appOperationUrl,
+            </if>
+            <if test="null !=appOperationName and ''!=appOperationName">
+                appOperationName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                #{id},
+            </if>
+            <if test="null !=webappid and '' !=webappid">
+                #{webappid},
+            </if>
+            <if test="null !=webappsecret and '' !=webappsecret">
+                #{webappsecret},
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                #{freestatus},
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                #{webappdevuser},
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                #{webappname},
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                #{webappenname},
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                #{webapptype},
+            </if>
+            <if test="null !=webapppicsmall">
+                #{webapppicsmall, jdbcType=BLOB},
+            </if>
+            <if test="null !=picsmallpath and '' !=picsmallpath">
+                #{picsmallpath},
+            </if>
+            <if test="null !=webapppic">
+                #{webapppic, jdbcType=BLOB},
+            </if>
+            <if test="null !=picpath and '' !=picpath">
+                #{picpath},
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                #{webappstatus},
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                #{webappwebsite},
+            </if>
+            <if test="null !=webappwebsitewh and '' !=webappwebsitewh">
+                #{webappwebsitewh},
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                #{webappversion},
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                #{webappversionname},
+            </if>
+            <if test="null !=webappoauth and '' !=webappoauth">
+                #{webappoauth},
+            </if>
+            <if test="null !=webappsso and '' !=webappsso">
+                #{webappsso},
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                #{webappscope},
+            </if>
+            <if test="null !=webappregisterinfo">
+                #{webappregisterinfo, jdbcType=BLOB},
+            </if>
+            <if test="null !=regestinfopath and '' !=regestinfopath">
+                #{regestinfopath},
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                #{webappos},
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                #{webappshowtype},
+            </if>
+            <if test="null !=webappinstallurl and '' !=webappinstallurl">
+                #{webappinstallurl},
+            </if>
+            <if test="null !=webappinstallorcode">
+                #{webappinstallorcode, jdbcType=BLOB},
+            </if>
+            <if test="null !=orcodepath and '' !=orcodepath">
+                #{orcodepath},
+            </if>
+            <if test="null !=webappsize and '' !=webappsize">
+                #{webappsize},
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                #{handleuser},
+            </if>
+            <if test="null !=createtime">
+                #{createtime},
+            </if>
+            <if test="null !=updatetime">
+                #{updatetime},
+            </if>
+            <if test="null !=webappkind and '' !=webappkind">
+                #{webappkind},
+            </if>
+            <if test="null !=webappip and '' !=webappip">
+                #{webappip},
+            </if>
+            <if test="null !=freeuse and '' !=freeuse">
+                #{freeuse},
+            </if>
+            <if test="null !=appOperationUrl and ''!=appOperationUrl">
+                #{appOperationUrl},
+            </if>
+            <if test="null !=appOperationName and ''!=appOperationName">
+                #{appOperationName},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="editWebApp" parameterType="PlatFormWebApp">
+        update platform_webapplication
+        <set>
+            appOperationName=#{appOperationName},appOperationUrl=#{appOperationUrl},
+            <if test="null !=webappsecret and ''!=webappsecret">
+                webappsecret=#{webappsecret},
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                freestatus=#{freestatus},
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                webappdevuser=#{webappdevuser},
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                webappname=#{webappname},
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                webappenname=#{webappenname},
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                webapptype=#{webapptype},
+            </if>
+            <if test="null !=webapppicsmall">
+                webapppicsmall=#{webapppicsmall, jdbcType=BLOB},
+            </if>
+            <if test="null !=webapppic">
+                webapppic=#{webapppic, jdbcType=BLOB},
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                webappstatus=#{webappstatus},
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                webappwebsite=#{webappwebsite},
+            </if>
+            <if test="null !=webappwebsitewh and '' !=webappwebsitewh">
+                webappwebsitewh=#{webappwebsitewh},
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                webappversion=#{webappversion},
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                webappversionname=#{webappversionname},
+            </if>
+            <if test="null !=webappoauth and '' !=webappoauth">
+                webappoauth =#{webappoauth},
+            </if>
+            <if test="null !=webappsso and '' !=webappsso">
+                webappsso=#{webappsso},
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                webappscope=#{webappscope},
+            </if>
+            <if test="null !=webappregisterinfo">
+                webappregisterinfo=#{webappregisterinfo, jdbcType=BLOB},
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                webappos=#{webappos},
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                webappshowtype=#{webappshowtype},
+            </if>
+            <if test="null !=webappshowtype and ''!=webappshowtype and '1'.toString()==webappshowtype">
+                webappinstallurl=#{webappinstallurl},
+            </if>
+            <if test="null !=webappinstallurl and ''!=webappinstallurl">
+                webappinstallurl=#{webappinstallurl},
+            </if>
+            <if test="null !=webappinstallorcode">
+                webappinstallorcode=#{webappinstallorcode, jdbcType=BLOB},
+            </if>
+            <if test="null !=webappsize and '' !=webappsize">
+                webappsize=#{webappsize},
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                handleuser =#{handleuser},
+            </if>
+            <if test="null !=updatetime">
+                updatetime=#{updatetime},
+            </if>
+            <if test="null !=webappkind and '' !=webappkind">
+                webappkind=#{webappkind},
+            </if>
+            <if test="null !=picsmallpath and '' !=picsmallpath">
+                picsmallpath=#{picsmallpath},
+            </if>
+            <if test="null !=picpath and '' !=picpath">
+                picpath=#{picpath},
+            </if>
+            <if test="null !=regestinfopath and '' !=regestinfopath">
+                regestinfopath=#{regestinfopath},
+            </if>
+            <if test="null !=orcodepath and '' !=orcodepath">
+                orcodepath=#{orcodepath},
+            </if>
+            <if test="null !=webappip and '' !=webappip">
+                webappip=#{webappip},
+            </if>
+            <if test="null !=freeuse and '' !=freeuse">
+                freeuse=#{freeuse},
+            </if>
+            <if test="null !=newflag and ''!=newflag">
+                newflag=#{newflag},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="webAppList" parameterType="PlatFormWebApp" resultType="PlatFormWebApp">
+        select t.*,dict.name as kindname,dict.value as kindvalue,appcount.appsuitobj as webappsuitobj
+        ,appcount.introduce as desciption,appcount.defaultflag from platform_webapplication t
+        left join platform_dict dict on dict.name=webappkind
+        left join platform_app_accesscount appcount on appcount.appid = t.id
+        <where>
+            <if test="null !=id and '' !=id">
+                and t.id=#{id}
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                and t.freestatus=#{freestatus}
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                and t.webappdevuser=#{webappdevuser}
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                and t.webappname like '%'||#{webappname}||'%'
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                and t.webappenname=#{webappenname}
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                and t.webapptype=#{webapptype}
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                and t.webappstatus=#{webappstatus}
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                and t.webappwebsite=#{webappwebsite}
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                and t.webappversion=#{webappversion}
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                and t.webappversionname=#{webappversionname}
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                and t.webappscope=#{webappscope}
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                and t.webappos=#{webappos}
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                and t.webappshowtype=#{webappshowtype}
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                and t.handleuser =#{handleuser}
+            </if>
+            <if test="null !=updatetime">
+                and t.updatetime=#{updatetime}
+            </if>
+            <if test="null !=webappkind and ''!=webappkind">
+                and t.webappkind=#{webappkind}
+            </if>
+            <if test="null !=freeuse and ''!=freeuse">
+                and t.freeuse=#{freeuse}
+            </if>
+            <if test="null !=newflag and ''!=newflag">
+                and t.newflag=#{newflag}
+            </if>
+            <if test="requestSource =='tzweb'">
+                and t.webappstatus !='3'
+            </if>
+        </where>
+        order by webappname
+    </select>
+
+
+    <select id="webAppListCount" parameterType="PlatFormWebApp" resultType="java.lang.Integer">
+        select count(t.id) from platform_webapplication t
+        left join platform_dict dict on dict.name=webappkind
+        left join platform_app_accesscount appcount on appcount.appid = t.id
+        <where>
+            <if test="null !=id and '' !=id">
+                and t.id=#{id}
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                and t.freestatus=#{freestatus}
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                and t.webappdevuser=#{webappdevuser}
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                and t.webappname like '%'||#{webappname}||'%'
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                and t.webappenname=#{webappenname}
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                and t.webapptype=#{webapptype}
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                and t.webappstatus=#{webappstatus}
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                and t.webappwebsite=#{webappwebsite}
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                and t.webappversion=#{webappversion}
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                and t.webappversionname=#{webappversionname}
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                and t.webappscope=#{webappscope}
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                and t.webappos=#{webappos}
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                and t.webappshowtype=#{webappshowtype}
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                and t.handleuser =#{handleuser}
+            </if>
+            <if test="null !=updatetime">
+                and t.updatetime=#{updatetime}
+            </if>
+            <if test="null !=webappkind and ''!=webappkind">
+                and t.webappkind=#{webappkind}
+            </if>
+            <if test="null !=freeuse and ''!=freeuse">
+                and t.freeuse=#{freeuse}
+            </if>
+            <if test="null !=newflag and ''!=newflag">
+                and t.newflag=#{newflag}
+            </if>
+            <if test="requestSource =='tzweb'">
+                and t.webappstatus !='3'
+            </if>
+        </where>
+    </select>
+
+
+    <update id="resetAppSecret">
+        update platform_webapplication
+        <set>
+            <if test="null !=webappsecret and '' !=webappsecret">
+                webappsecret=#{webappsecret},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="listAppByKind" parameterType="PlatFormWebApp" resultType="PlatFormWebApp">
+        SELECT
+        application.id,application.freestatus,application.webappdevuser,application.webappname,application.webappenname,application.webapptype,application.webappkind,
+        application.webapppicsmall,application.picsmallpath,application.webapppic,
+        application.webappstatus,application.webappwebsite,application.webappip,application.webappwebsitewh,application.webappversion,
+        application.webappversionname,application.webappoauth,application.webappsso,application.webappscope,application.webappos,application.webappshowtype,application.webappinstallurl,
+        application.webappinstallorcode,application.orcodepath,application.webappsize,application.createtime,application.updatetime,
+        application.handleuser,application.freeuse,application.newflag,application.appoperationurl,application.appoperationname,dict. NAME AS kindname,dict.VALUE AS kindvalue,
+        (select platform_users.name from platform_users where id = application.webappdevuser) as userappname,
+        NVL (ACCOUNT .useappcount, 0) AS useappcount,
+        NVL (ACCOUNT .appstart, 0) AS appstart,
+        ACCOUNT .appsuitobj AS appsuitobj,
+        (select value from platform_dict where name =ACCOUNT.appsuiltxd and type='xd') as appsuiltxd,
+        ACCOUNT.introduce AS introduce,
+        NVL (ACCOUNT .collectcount,0) AS collectcount,
+        ACCOUNT.defaultflag as defaultflag
+        FROM
+        platform_webapplication application
+        LEFT JOIN platform_dict dict ON dict. NAME = application.webappkind
+        LEFT JOIN platform_app_accesscount ACCOUNT ON ACCOUNT .appid = application. ID
+        <where>
+            <if test="null !=id and '' !=id">
+                and application.id=#{id}
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                and freestatus==#{freestatus}
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                and webappdevuser=#{webappdevuser}
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                and webappname like '%'||#{webappname}||'%'
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                and webappenname like '%'||#{webappenname}||'%'
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                and webapptype=#{webapptype}
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                and webappstatus!=#{webappstatus}
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                and webappwebsite=#{webappwebsite}
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                and webappversion=#{webappversion}
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                and webappversionname=#{webappversionname}
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                and webappscope=#{webappscope}
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                and webappos=#{webappos}
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                and webappshowtype=#{webappshowtype}
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                and handleuser =#{handleuser}
+            </if>
+            <if test="null !=updatetime">
+                and updatetime=#{updatetime}
+            </if>
+            <if test="null !=webappkind and ''!=webappkind">
+                and webappkind=#{webappkind}
+            </if>
+            <if test="null !=freeuse and ''!=freeuse">
+                and freeuse=#{freeuse}
+            </if>
+            <if test="null !=defaultflag and ''!=defaultflag">
+                and account.defaultflag=#{defaultflag}
+            </if>
+        </where>
+        <if test="null !=sortName and ''!=sortName">
+            ORDER BY ${sortName} DESC nulls last
+        </if>
+    </select>
+    <select id="listAppByKindCount" parameterType="PlatFormWebApp" resultType="java.lang.Integer">
+        SELECT COUNT (application.id) FROM platform_webapplication application LEFT JOIN platform_app_accesscount
+        account ON account.appid=application.id
+        <where>
+            <if test="null !=id and '' !=id">
+                and application.id=#{id}
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                and freestatus==#{freestatus}
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                and webappdevuser=#{webappdevuser}
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                and webappname like '%'||#{webappname}||'%'
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                and webappenname like '%'||#{webappenname}||'%'
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                and webapptype=#{webapptype}
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                and webappstatus!=#{webappstatus}
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                and webappwebsite=#{webappwebsite}
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                and webappversion=#{webappversion}
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                and webappversionname=#{webappversionname}
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                and webappscope=#{webappscope}
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                and webappos=#{webappos}
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                and webappshowtype=#{webappshowtype}
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                and handleuser =#{handleuser}
+            </if>
+            <if test="null !=updatetime">
+                and updatetime=#{updatetime}
+            </if>
+            <if test="null !=webappkind and ''!=webappkind">
+                and webappkind=#{webappkind}
+            </if>
+            <if test="null !=freeuse and ''!=freeuse">
+                and freeuse=#{freeuse}
+            </if>
+            <if test="null !=defaultflag and ''!=defaultflag">
+                and account.defaultflag=#{defaultflag}
+            </if>
+        </where>
+    </select>
+    <select id="listComment" resultMap="PlatFormAppCommentMap" parameterType="PlatFormAppComment">
+        select
+        appcomment.id,appcomment.appid,appcomment.commenttype,appcomment.commentcontent,appcomment.commentuser,appcomment.commentstart,appcomment.createtime,appcomment.updatetime
+        from platform_app_comment appcomment
+        <where>
+            <if test="null !=appid and ''!=appid">
+                and appid=#{appid}
+            </if>
+            <if test="null !=commenttype and ''!=commenttype">
+                and commenttype=#{commenttype}
+            </if>
+            <if test="null !=commentuser and ''!=commentuser">
+                and commentuser=#{commentuser}
+            </if>
+        </where>
+        ORDER BY createtime DESC
+    </select>
+    <select id="listCommentCount" parameterType="PlatFormAppComment" resultType="java.lang.Integer">
+        SELECT count(id) from platform_app_comment appcomment
+        <where>
+            <if test="null !=appid and ''!=appid">
+                and appid=#{appid}
+            </if>
+            <if test="null !=commenttype and ''!=commenttype">
+                and commenttype=#{commenttype}
+            </if>
+            <if test="null !=commentuser and ''!=commentuser">
+                and commentuser=#{commentuser}
+            </if>
+        </where>
+    </select>
+    <select id="avgComment" parameterType="PlatFormAppComment" resultType="java.util.HashMap">
+        SELECT "AVG"(appcomment.COMMENTSTART) as avgcommentstart FROM platform_app_comment appcomment
+        <where>
+            <if test="null !=appid and ''!=appid">
+                appid=#{appid}
+            </if>
+        </where>
+    </select>
+    <insert id="addComment" parameterType="PlatFormAppComment">
+        INSERT INTO platform_app_comment
+        <trim suffix=")" prefix="(" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                id,
+            </if>
+            <if test="null !=appid and ''!=appid">
+                appid,
+            </if>
+            <if test="null !=commenttype and ''!=commenttype">
+                commenttype,
+            </if>
+            <if test="null !=commentcontent and ''!=commentcontent">
+                commentcontent,
+            </if>
+            <if test="null !=commentuser and ''!=commentuser">
+                commentuser,
+            </if>
+            <if test="null !=commentstart and ''!=commentstart">
+                commentstart,
+            </if>
+            <if test="null !=createtime">
+                createtime,
+            </if>
+            <if test="null !=updatetime">
+                updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=appid and ''!=appid">
+                #{appid},
+            </if>
+            <if test="null !=commenttype and ''!=commenttype">
+                #{commenttype},
+            </if>
+            <if test="null !=commentcontent and ''!=commentcontent">
+                #{commentcontent},
+            </if>
+            <if test="null !=commentuser and ''!=commentuser">
+                #{commentuser},
+            </if>
+            <if test="null !=commentstart and ''!=commentstart">
+                #{commentstart},
+            </if>
+            <if test="null !=createtime">
+                #{createtime},
+            </if>
+            <if test="null !=updatetime">
+                #{updatetime},
+            </if>
+        </trim>
+    </insert>
+    <select id="listAppByKindHobby" parameterType="PlatFormWebApp" resultType="PlatFormWebApp">
+        SELECT
+        application.id,application.freestatus,application.webappdevuser,application.webappname,application.webappenname,application.webapptype,application.webappkind,
+        application.webapppicsmall,application.picsmallpath,application.webapppic,
+        application.webappstatus,application.webappwebsite,application.webappip,application.webappwebsitewh,application.webappversion,
+        application.webappversionname,application.webappoauth,application.webappsso,application.webappscope,application.webappos,application.webappshowtype,application.webappinstallurl,
+        application.webappinstallorcode,application.orcodepath,application.webappsize,application.createtime,application.updatetime,
+        application.handleuser,application.freeuse,application.newflag,dict. NAME AS kindname,dict.VALUE AS
+        kindvalue,USERS . NAME AS userappname,NVL (ACCOUNT .useappcount, 0) AS useappcount,NVL (ACCOUNT .appstart, 0) AS
+        appstart,
+        ACCOUNT .appsuitobj AS appsuitobj,dictxd.value as appsuiltxd,ACCOUNT .introduce AS introduce,NVL (ACCOUNT
+        .collectcount,0) AS collectcount,ACCOUNT.defaultflag as defaultflag
+        FROM platform_webapplication application LEFT JOIN platform_dict dict ON dict. NAME = application.webappkind
+        LEFT JOIN platform_users USERS ON USERS . ID = application.webappdevuser
+        LEFT JOIN platform_app_accesscount ACCOUNT ON ACCOUNT .appid = application. ID
+        LEFT JOIN PLATFORM_DICT dictxd ON account.appsuiltxd=dictxd.name and dictxd.type='xd'
+        <where>
+            <if test="null !=idArray">
+                AND application.id NOT IN
+                <foreach collection="idArray" item="items" open="(" close=")" separator=",">
+                    #{items}
+                </foreach>
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                and freestatus==#{freestatus}
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                and webappdevuser=#{webappdevuser}
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                and webappname like '%'||#{webappname}||'%'
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                and webappenname like '%'||#{webappenname}||'%'
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                and webapptype=#{webapptype}
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                and webappstatus!=#{webappstatus}
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                and webappwebsite=#{webappwebsite}
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                and webappversion=#{webappversion}
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                and webappversionname=#{webappversionname}
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                and webappscope=#{webappscope}
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                and webappos=#{webappos}
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                and webappshowtype=#{webappshowtype}
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                and handleuser =#{handleuser}
+            </if>
+            <if test="null !=updatetime">
+                and updatetime=#{updatetime}
+            </if>
+            <if test="null !=webappkind and ''!=webappkind">
+                and webappkind=#{webappkind}
+            </if>
+            <if test="null !=freeuse and ''!=freeuse">
+                and freeuse=#{freeuse}
+            </if>
+            <if test="null !=defaultflag and ''!=defaultflag">
+                and account.defaultflag=#{defaultflag}
+            </if>
+        </where>
+        ORDER BY updatetime DESC nulls last
+    </select>
+    <select id="listAppByKindHobbyCount" parameterType="PlatFormWebApp" resultType="java.lang.Integer">
+        SELECT COUNT (application.id) FROM platform_webapplication application LEFT JOIN platform_app_accesscount
+        account ON account.appid=application.id
+        <where>
+            <if test="null !=idArray">
+                AND application.id NOT IN
+                <foreach collection="idArray" item="items" open="(" close=")" separator=",">
+                    #{items}
+                </foreach>
+            </if>
+            <if test="null !=freestatus and '' !=freestatus">
+                and freestatus==#{freestatus}
+            </if>
+            <if test="null !=webappdevuser and '' !=webappdevuser">
+                and webappdevuser=#{webappdevuser}
+            </if>
+            <if test="null !=webappname and '' !=webappname">
+                and webappname like '%'||#{webappname}||'%'
+            </if>
+            <if test="null !=webappenname and '' !=webappenname">
+                and webappenname like '%'||#{webappenname}||'%'
+            </if>
+            <if test="null !=webapptype and '' !=webapptype">
+                and webapptype=#{webapptype}
+            </if>
+            <if test="null !=webappstatus and '' !=webappstatus">
+                and webappstatus!=#{webappstatus}
+            </if>
+            <if test="null !=webappwebsite and '' !=webappwebsite">
+                and webappwebsite!=#{webappwebsite}
+            </if>
+            <if test="null !=webappversion and '' !=webappversion">
+                and webappversion=#{webappversion}
+            </if>
+            <if test="null !=webappversionname and '' !=webappversionname">
+                and webappversionname=#{webappversionname}
+            </if>
+            <if test="null !=webappscope and '' !=webappscope">
+                and webappscope=#{webappscope}
+            </if>
+            <if test="null !=webappos and '' !=webappos">
+                and webappos=#{webappos}
+            </if>
+            <if test="null !=webappshowtype and '' !=webappshowtype">
+                and webappshowtype=#{webappshowtype}
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                and handleuser =#{handleuser}
+            </if>
+            <if test="null !=updatetime">
+                and updatetime=#{updatetime}
+            </if>
+            <if test="null !=webappkind and ''!=webappkind">
+                and webappkind=#{webappkind}
+            </if>
+            <if test="null !=freeuse and ''!=freeuse">
+                and freeuse=#{freeuse}
+            </if>
+            <if test="null !=defaultflag and ''!=defaultflag">
+                and account.defaultflag=#{defaultflag}
+            </if>
+        </where>
+    </select>
+    <insert id="appUseCollect">
+        INSERT INTO platform_app_use
+        <trim suffix=")" prefix="(" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                id,
+            </if>
+            <if test="null !=user and ''!=user">
+                userid,
+            </if>
+            <if test="null !=appid and ''!=appid">
+                appid,
+            </if>
+            <if test="null !=type and ''!=type">
+                usetype,
+            </if>
+            <if test="null !=usedate">
+                usedate,
+            </if>
+            <if test="null !=requestSource and ''!=requestSource">
+                apptype,
+            </if>
+            <if test="null !=appsort and ''!=appsort">
+                appsort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=user and ''!=user">
+                #{user},
+            </if>
+            <if test="null !=appid and ''!=appid">
+                #{appid},
+            </if>
+            <if test="null !=type and ''!=type">
+                #{type},
+            </if>
+            <if test="null !=usedate">
+                #{usedate},
+            </if>
+            <if test="null !=requestSource and ''!=requestSource">
+                #{requestSource},
+            </if>
+            <if test="null !=appsort and ''!=appsort">
+                #{appsort},
+            </if>
+        </trim>
+    </insert>
+    <select id="listAppCollect" resultType="PlatFormWebApp">
+        SELECT
+        a.id,a.freestatus,a.webappdevuser,a.webappname,a.webappenname,a.webapptype,a.webappkind,a.webapppicsmall,a.picsmallpath,a.webapppic,
+        a.webappstatus,a.webappwebsite,a.webappip,a.webappwebsitewh,a.webappversion,
+        a.webappversionname,a.webappoauth,a.webappsso,a.webappscope,a.webappos,a.webappshowtype,a.webappinstallurl,
+        a.webappinstallorcode,a.orcodepath,a.webappsize,a.createtime,a.updatetime,
+        a.handleuser,a.freeuse,a.newflag FROM platform_app_use u LEFT JOIN platform_webapplication a ON
+        a.id=u.appid WHERE u.userid=#{user} AND a.webappstatus!='3'
+        <if test="null !=type and ''!=type">
+            AND u.usetype=#{type}
+        </if>
+        <if test="null !=appid and ''!=appid">
+            AND u.appid=#{appid}
+        </if>
+        <if test="null !=webappos and ''!=webappos and 'web'.toString()!=webappos">
+            AND (u.apptype=#{webappos} OR u.apptype='other')
+        </if>
+        <if test="null !=webappos and ''!=webappos and 'web'.toString()==webappos">
+            AND u.apptype=#{webappos}
+        </if>
+        ORDER BY u.appsort ASC,u.usedate DESC
+    </select>
+    <select id="listAppCollectCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM platform_app_use u LEFT JOIN platform_webapplication a ON
+        a.id=u.appid WHERE userid=#{user} AND a.webappstatus!='3'
+        <if test="null !=type and ''!=type">
+            AND u.usetype=#{type}
+        </if>
+        <if test="null !=appid and ''!=appid">
+            AND u.appid=#{appid}
+        </if>
+        <if test="null !=webappos and ''!=webappos and 'web'.toString()!=webappos">
+            AND (u.apptype=#{webappos} OR u.apptype='other')
+        </if>
+        <if test="null !=webappos and ''!=webappos and 'web'.toString()==webappos">
+            AND u.apptype=#{webappos}
+        </if>
+    </select>
+    <delete id="deleteAppCollect" parameterType="java.lang.String">
+        DELETE FROM platform_app_use WHERE userid=#{user}
+        <if test="null !=idArray">
+            AND appid IN
+            <foreach collection="idArray" item="items" open="(" close=")" separator=",">
+                #{items}
+            </foreach>
+        </if>
+        <if test="null !=requestSource and ''!=requestSource">
+            AND (apptype=#{requestSource} OR apptype='other')
+        </if>
+    </delete>
+
+    <insert id="addAppFile" parameterType="PlatFormWepAppFile">
+        INSERT INTO platform_app_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                id,
+            </if>
+            <if test="null !=appid and ''!=appid">
+                appid,
+            </if>
+            <if test="null !=filepath and ''!=filepath">
+                filepath,
+            </if>
+            <if test="null !=filename and ''!=filename">
+                filename,
+            </if>
+            <if test="null !=fileorder and ''!=fileorder">
+                fileorder,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=appid and ''!=appid">
+                #{appid},
+            </if>
+            <if test="null !=filepath and ''!=filepath">
+                #{filepath},
+            </if>
+            <if test="null !=filename and ''!=filename">
+                #{filename},
+            </if>
+            <if test="null !=fileorder and ''!=fileorder">
+                #{fileorder},
+            </if>
+        </trim>
+    </insert>
+    <delete id="deleteFileList" parameterType="java.lang.String">
+        DELETE FROM platform_app_file WHERE
+        id IN
+        <foreach collection="deleteIdList" item="items" separator="," open="(" close=")">
+            #{items}
+        </foreach>
+    </delete>
+
+    <delete id="deleteFile" parameterType="java.lang.String">
+        DELETE FROM platform_app_file WHERE appid=#{id} AND fileorder=#{fileorder}
+    </delete>
+    <select id="queryFileList" parameterType="java.lang.String" resultType="PlatFormWepAppFile">
+        SELECT * from platform_app_file WHERE appid=#{id}
+    </select>
+
+    <select id="queryFile" parameterType="java.lang.String" resultType="PlatFormWepAppFile">
+        SELECT * from platform_app_file WHERE id=#{id}
+    </select>
+
+    <select id="webApp" parameterType="java.lang.String" resultType="PlatFormWebApp">
+        SELECT webappsecret,webappip from platform_webapplication WHERE webappid=#{webappkey}
+    </select>
+
+    <select id="listThirdAppCollect" resultType="PlatFormWebApp" parameterType="PlatFormWebApp">
+        SELECT a.id,a.WEBAPPNAME,a.WEBAPPKIND,a.WEBAPPPICSMALL, (select count(appuse.id) from PLATFORM_APP_USE appuse
+        where appuse.userid=#{user} and appuse.apptype=#{webappos} and appuse.appid=a.id
+        )added from PLATFORM_WEBAPPLICATION a WHERE a.webappstatus!='3'
+        <if test="null !=webappname and '' !=webappname">
+            and a.webappname like '%'||#{webappname}||'%'
+        </if>
+        <if test="null !=webapptype and '' !=webapptype">
+            and a.webapptype=#{webapptype}
+        </if>
+        <if test="null !=webappkind and ''!=webappkind">
+            and a.webappkind=#{webappkind}
+        </if>
+        <if test="null !=webappos and ''!=webappos">
+            and (a.webappos=#{webappos} OR a.webappos='other')
+        </if>
+    </select>
+    <select id="listThirdAppCollectCount" parameterType="PlatFormWebApp" resultType="java.lang.Integer">
+        SELECT count(a.id) from PLATFORM_WEBAPPLICATION a WHERE a.webappstatus!='3'
+        <if test="null !=webappname and '' !=webappname">
+            and a.webappname like '%'||#{webappname}||'%'
+        </if>
+        <if test="null !=webapptype and '' !=webapptype">
+            and a.webapptype=#{webapptype}
+        </if>
+        <if test="null !=webappkind and ''!=webappkind">
+            and a.webappkind=#{webappkind}
+        </if>
+        <if test="null !=webappos and ''!=webappos">
+            and (a.webappos=#{webappos} OR a.webappos='other')
+        </if>
+    </select>
+    <delete id="delWebApp" parameterType="PlatFormWebApp">
+        delete from PLATFORM_WEBAPPLICATION WHERE id=#{id}
+    </delete>
+</mapper>

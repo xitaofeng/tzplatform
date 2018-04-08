@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.user.PlatFormUserDao">
+
+
+    <insert id="addUser" parameterType="PlatFormUser">
+        INSERT INTO platform_users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                id,
+            </if>
+            <if test="null !=name and '' !=name">
+                name,
+            </if>
+            <if test="null !=account and '' !=account">
+                account,
+            </if>
+            <if test="null !=sex and '' !=sex">
+                sex,
+            </if>
+            <if test="null !=password and '' !=password">
+                password,
+            </if>
+            <if test="null !=passsalt and '' !=passsalt">
+                passsalt,
+            </if>
+            <if test="null !=usertype and '' !=usertype">
+                usertype,
+            </if>
+            <if test="null !=telphone and '' !=telphone">
+                telphone,
+            </if>
+            <if test="null !=address and '' !=address">
+                address,
+            </if>
+            <if test="null !=email and '' !=email">
+                email,
+            </if>
+            <if test="null !=idcard and '' !=idcard">
+                idcard,
+            </if>
+            <if test="null !=idcardpicture ">
+                idcardpicture,
+            </if>
+            <if test="null !=idcardpicturepath and '' !=idcardpicturepath">
+                idcardpicturepath,
+            </if>
+            <if test="null !=companyname and '' !=companyname">
+                companyname,
+            </if>
+            <if test="null !=companyaddress and '' !=companyaddress">
+                companyaddress,
+            </if>
+            <if test="null !=companycard">
+                companycard,
+            </if>
+            <if test="null !=companycardpath and '' !=companycardpath">
+                companycardpath,
+            </if>
+            <if test="null !=companyleader and '' !=companyleader">
+                companyleader,
+            </if>
+            <if test="null !=companyleaderidcard and '' !=companyleaderidcard">
+                companyleaderidcard,
+            </if>
+            <if test="null !=companyleadercardtype">
+                companyleadercardtype,
+            </if>
+            <if test="null !=companyleadercardtypepath and '' !=companyleadercardtypepath">
+                companyleadercardtypepath,
+            </if>
+            <if test="null !=companyleaderphone and '' !=companyleaderphone">
+                companyleaderphone,
+            </if>
+            <if test="null !=companywebsite and '' !=companywebsite">
+                companywebsite,
+            </if>
+            <if test="null !=companyidcard and '' !=companyidcard">
+                companyidcard,
+            </if>
+            <if test="null !=companyfax and '' !=companyfax">
+                companyfax,
+            </if>
+            <if test="null !=createtime">
+                createtime,
+            </if>
+            <if test="null !=updatetime">
+                updatetime,
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                handleuser,
+            </if>
+            <if test="null !=userstatus and '' !=userstatus">
+                userstatus,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                #{id},
+            </if>
+            <if test="null !=name and '' !=name">
+                #{name},
+            </if>
+            <if test="null !=account and '' !=account">
+                #{account},
+            </if>
+            <if test="null !=sex and '' !=sex">
+                #{sex},
+            </if>
+            <if test="null !=password and '' !=password">
+                #{password},
+            </if>
+            <if test="null !=passsalt and '' !=passsalt">
+                #{passsalt},
+            </if>
+            <if test="null !=usertype and '' !=usertype">
+                #{usertype},
+            </if>
+            <if test="null !=telphone and '' !=telphone">
+                #{telphone},
+            </if>
+            <if test="null !=address and '' !=address">
+                #{address},
+            </if>
+            <if test="null !=email and '' !=email">
+                #{email},
+            </if>
+            <if test="null !=idcard and '' !=idcard">
+                #{idcard},
+            </if>
+            <if test="null !=idcardpicture">
+                #{idcardpicture},
+            </if>
+            <if test="null !=idcardpicturepath and '' !=idcardpicturepath">
+                #{idcardpicturepath},
+            </if>
+            <if test="null !=companyname and '' !=companyname">
+                #{companyname},
+            </if>
+            <if test="null !=companyaddress and '' !=companyaddress">
+                #{companyaddress},
+            </if>
+            <if test="null !=companycard">
+                #{companycard},
+            </if>
+            <if test="null !=companycardpath and '' !=companycardpath">
+                #{companycardpath},
+            </if>
+            <if test="null !=companyleader and '' !=companyleader">
+                #{companyleader},
+            </if>
+            <if test="null !=companyleaderidcard and '' !=companyleaderidcard">
+                #{companyleaderidcard},
+            </if>
+            <if test="null !=companyleadercardtype">
+                #{companyleadercardtype},
+            </if>
+            <if test="null !=companyleadercardtypepath and '' !=companyleadercardtypepath">
+                #{companyleadercardtypepath},
+            </if>
+            <if test="null !=companyleaderphone and '' !=companyleaderphone">
+                #{companyleaderphone},
+            </if>
+            <if test="null !=companywebsite and '' !=companywebsite">
+                #{companywebsite},
+            </if>
+            <if test="null !=companyidcard and '' !=companyidcard">
+                #{companyidcard},
+            </if>
+            <if test="null !=companyfax and '' !=companyfax">
+                #{companyfax},
+            </if>
+            <if test="null !=createtime">
+                #{createtime},
+            </if>
+            <if test="null !=updatetime">
+                #{updatetime},
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                #{handleuser},
+            </if>
+            <if test="null !=userstatus and '' !=userstatus">
+                #{userstatus},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateUser" parameterType="PlatFormUser">
+        update platform_users
+        <set>
+            <if test="null !=name and '' !=name">
+                name=#{name},
+            </if>
+            <if test="null !=account and '' !=account">
+                account=#{account},
+            </if>
+            <if test="null !=sex and '' !=sex">
+                sex=#{sex},
+            </if>
+            <if test="null !=password and '' !=password">
+                password=#{password},
+            </if>
+            <if test="null !=passsalt and '' !=passsalt">
+                passsalt=#{passsalt},
+            </if>
+            <if test="null !=usertype and '' !=usertype">
+                usertype=#{usertype},
+            </if>
+            <if test="null !=telphone and '' !=telphone">
+                telphone=#{telphone},
+            </if>
+            <if test="null !=address and '' !=address">
+                address=#{address},
+            </if>
+            <if test="null !=email and '' !=email">
+                email=#{email},
+            </if>
+            <if test="null !=idcard and '' !=idcard">
+                idcard=#{idcard},
+            </if>
+            <if test="null !=idcardpicture">
+                idcardpicture=#{idcardpicture},
+            </if>
+            <if test="null !=idcardpicturepath and '' !=idcardpicturepath">
+                idcardpicturepath=#{idcardpicturepath},
+            </if>
+            <if test="null !=companyname and '' !=companyname">
+                companyname=#{companyname},
+            </if>
+            <if test="null !=companyaddress and '' !=companyaddress">
+                companyaddress=#{companyaddress},
+            </if>
+            <if test="null !=companycard">
+                companycard=#{companycard},
+            </if>
+            <if test="null !=companycardpath and '' !=companycardpath">
+                companycardpath=#{companycardpath},
+            </if>
+            <if test="null !=companyleader and '' !=companyleader">
+                companyleader=#{companyleader},
+            </if>
+            <if test="null !=companyleaderidcard and '' !=companyleaderidcard">
+                companyleaderidcard=#{companyleaderidcard},
+            </if>
+            <if test="null !=companyleadercardtype">
+                companyleadercardtype=#{companyleadercardtype},
+            </if>
+            <if test="null !=companyleadercardtypepath and '' !=companyleadercardtypepath">
+                companyleadercardtypepath=#{companyleadercardtypepath},
+            </if>
+            <if test="null !=companyleaderphone and '' !=companyleaderphone">
+                companyleaderphone=#{companyleaderphone},
+            </if>
+            <if test="null !=companywebsite and '' !=companywebsite">
+                companywebsite=#{companywebsite},
+            </if>
+            <if test="null !=companyidcard and '' !=companyidcard">
+                companyidcard=#{companyidcard},
+            </if>
+            <if test="null !=companyfax and '' !=companyfax">
+                companyfax=#{companyfax},
+            </if>
+            <if test="null !=createtime">
+                createtime=#{createtime},
+            </if>
+            <if test="null !=updatetime">
+                updatetime=#{updatetime},
+            </if>
+            <if test="null !=handleuser and '' !=handleuser">
+                handleuser=#{handleuser},
+            </if>
+            <if test="null !=userstatus and '' !=userstatus">
+                userstatus=#{userstatus},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delUser">
+        delete from platform_users where id=#{id}
+    </delete>
+
+    <select id="userList" parameterType="PlatFormUser" resultType="PlatFormUser">
+        select
+        id,name,account,usertype,telphone,address,email,idcard,idcardpicture,companyname,companyaddress,companycard,
+        companyleader,companyleaderidcard,companyleadercardtype,companyleaderphone,companywebsite,companyidcard,companyfax,userstatus
+        from platform_users where 1=1
+        <if test="null != id and ''!= id">
+            and id=#{id}
+        </if>
+        <if test="null != name and ''!= name">
+            and name like '%'||#{name}||'%'
+        </if>
+        <if test="null != account and ''!= account">
+            and account=#{account}
+        </if>
+        <if test="null != usertype and ''!= usertype">
+            and usertype=#{usertype}
+        </if>
+        <if test="null != telphone and ''!= telphone">
+            and telphone=#{telphone}
+        </if>
+        <if test="null != userstatus and ''!= userstatus">
+            and userstatus=#{userstatus}
+        </if>
+        <if test="null != email and ''!= email">
+            and email=#{email}
+        </if>
+        <if test="null != companyleader and ''!= companyleader">
+            and companyleader like '%'||#{companyleader}||'%'
+        </if>
+        <if test="null != companyleaderphone and ''!= companyleaderphone">
+            and companyleaderphone=#{companyleaderphone}
+        </if>
+    </select>
+
+    <select id="userListCount" parameterType="PlatFormUser" resultType="int">
+        select  count(platform_users.id) from platform_users where 1=1
+        <if test="null != id and ''!= id">
+            and id=#{id}
+        </if>
+        <if test="null != name and ''!= name">
+            and name like '%'||#{name}||'%'
+        </if>
+        <if test="null != account and ''!= account">
+            and account like '%'||#{account}||'%'
+        </if>
+        <if test="null != usertype and ''!= usertype">
+            and usertype=#{usertype}
+        </if>
+        <if test="null != telphone and ''!= telphone">
+            and telphone=#{telphone}
+        </if>
+        <if test="null != userstatus and ''!= userstatus">
+            and userstatus=#{userstatus}
+        </if>
+        <if test="null != email and ''!= email">
+            and email=#{email}
+        </if>
+        <if test="null != companyleader and ''!= companyleader">
+            and companyleader like '%'||#{companyleader}||'%'
+        </if>
+        <if test="null != companyleaderphone and ''!= companyleaderphone">
+            and companyleaderphone=#{companyleaderphone}
+        </if>
+    </select>
+
+    <update id="changePwdByAccount">
+         update platform_users set password=#{password} , passsalt=#{passsalt} where id=#{accountid}
+    </update>
+
+</mapper>

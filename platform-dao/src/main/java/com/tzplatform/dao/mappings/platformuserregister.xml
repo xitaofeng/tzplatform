@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.user.PlatFormUserRegisterDao">
+
+    <select id="getUserByUserId" resultType="PlatFormUser">
+        select  id,name,account,password,passsalt from platform_users where 1=1 and id=#{userid} and usertype=#{usertype}
+    </select>
+
+    <insert id="addSendMail" parameterType="PlatFormSendMail">
+        INSERT INTO platform_send_mail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                id,
+            </if>
+            <if test="null !=email and ''!=email">
+                email,
+            </if>
+            <if test="null !=keysecret and ''!=keysecret">
+                keysecret,
+            </if>
+            <if test="null !=ip and ''!=ip">
+                ip,
+            </if>
+            <if test="null !=starttime">
+                starttime,
+            </if>
+            <if test="null !=endtime">
+                endtime,
+            </if>
+            <if test="null !=usecount">
+                usecount,
+            </if>
+            <if test="null !=delflag and ''!=delflag">
+                delflag,
+            </if>
+            <if test="null !=createuser and ''!=createuser">
+                createuser,
+            </if>
+            <if test="null !=updateuser and ''!=updateuser">
+                updateuser,
+            </if>
+            <if test="null !=createtime">
+                createtime,
+            </if>
+            <if test="null !=updatetime">
+                updatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=email and ''!=email">
+                #{email},
+            </if>
+            <if test="null !=keysecret and ''!=keysecret">
+                #{keysecret},
+            </if>
+            <if test="null !=ip and ''!=ip">
+                #{ip},
+            </if>
+            <if test="null !=starttime">
+                #{starttime},
+            </if>
+            <if test="null !=endtime">
+                #{endtime},
+            </if>
+            <if test="null !=usecount">
+                #{usecount},
+            </if>
+            <if test="null !=delflag and ''!=delflag">
+                #{delflag},
+            </if>
+            <if test="null !=createuser and ''!=createuser">
+                #{createuser},
+            </if>
+            <if test="null !=updateuser and ''!=updateuser">
+                #{updateuser},
+            </if>
+            <if test="null !=createtime">
+                #{createtime},
+            </if>
+            <if test="null !=updatetime">
+                #{updatetime},
+            </if>
+        </trim>
+    </insert>
+
+
+</mapper>

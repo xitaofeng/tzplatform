@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.system.PlatFormMenuRoleDao">
+    <insert id="addResourceByRole">
+        INSERT INTO platform_rolemenu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                id,
+            </if>
+            <if test="null !=roleid and ''!=roleid">
+                roleid,
+            </if>
+            <if test="null !=menuid and ''!=menuid">
+                menuid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                #{id},
+            </if>
+            <if test="null !=roleid and ''!=roleid">
+                #{roleid},
+            </if>
+            <if test="null !=menuid and ''!=menuid">
+                #{menuid},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delRourceByRole">
+        delete from platform_rolemenu where roleid=#{roleid}
+    </delete>
+
+    <select id="getResourceByRole" resultType="java.lang.String">
+        select menuid from platform_rolemenu where roleid=#{roleid}
+    </select>
+
+
+    <select id="getResourceByRoleIds" resultType="java.lang.String">
+        select menuid from platform_rolemenu where roleid in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+</mapper>

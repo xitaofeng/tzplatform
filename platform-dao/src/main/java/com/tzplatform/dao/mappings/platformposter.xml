@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.mobileplatform.PlatformPosterDao">
+
+    <insert id="addPoster">
+        INSERT INTO platform_platform_poster
+        (id,title,position,content,image,imagepath,status,updatetime,schoolId,range,createtime)
+         values (
+          #{id},
+          #{title},
+          #{position},
+          #{content},
+          #{image},
+          #{imagePath},
+          #{status},
+          #{updateTime},
+          #{schoolId},
+          #{range},
+          #{createTime}
+         )
+    </insert>
+
+    <select id="listPoster"  resultType="Poster">
+        select id,title,position,content,image,imagepath,status,updatetime,schoolId,range from platform_platform_poster
+        <where>
+            <if test="null !=id and '' !=id">
+                and id=#{id}
+            </if>
+            <if test="null !=position and '' !=position">
+                and position=#{position}
+            </if>
+            <if test="null ==range and null !=schoolId and '' !=schoolId">
+                and schoolId=#{schoolId}
+            </if>
+            <if test="range=='2'.toString()">
+                and schoolId like  '%'||#{schoolId}||'%'  and range ='2'
+            </if>
+            <if test="range=='1'.toString()">
+                and range ='1'
+            </if>
+            <if test="null !=status and '' !=status">
+                and status=#{status}
+            </if>
+        </where>
+        order by status desc, updatetime desc,createtime desc
+    </select>
+
+
+    <select id="listPosterCount" parameterType="PlatFormWebApp" resultType="java.lang.Integer">
+        select count(*) from platform_platform_poster
+        <where>
+            <if test="null !=id and '' !=id">
+                and id=#{id}
+            </if>
+            <if test="null !=position and '' !=position">
+                and position=#{position}
+            </if>
+            <if test="null ==range and null !=schoolId and '' !=schoolId">
+                and schoolId=#{schoolId}
+            </if>
+            <if test="range=='2'.toString()">
+                and schoolId like  '%'||#{schoolId}||'%'  and range ='2'
+            </if>
+            <if test="range=='1'.toString()">
+                and range ='1'
+            </if>
+            <if test="null !=status and '' !=status">
+                and status=#{status}
+            </if>
+        </where>
+    </select>
+
+    <update id="updatePoster">
+        update  platform_platform_poster
+         set
+              title =#{title},
+              position=#{position },
+              content=#{content},
+              image=#{image},
+            <if test="null !=imagePath and ''!=imagePath">
+                imagepath=#{imagePath},
+            </if>
+              status=#{status},
+              updatetime=#{updateTime}
+          where id=#{id}
+    </update>
+    <delete id="deletePoster">
+        delete FROM  platform_platform_poster  where id =#{id}
+    </delete>
+    <update id="updateStatus">
+        update  platform_platform_poster
+        set
+        status=#{status},
+        updatetime=#{updateTime}
+        where id=#{id}
+
+    </update>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.user.PlatFormSysUserLoginDao">
+
+    <select id="getUserByAccount" resultType="PlatFormUser">
+        select  id,name,account,password,passsalt from platform_users where 1=1 and account=#{account} and usertype=#{usertype}
+    </select>
+    <select id="getMobieUserByAccount" resultType="MobileUser">
+        select  id,xm as userName,account as accountId,password,usertype,schoolcode  from platform_mobile_user where 1=1 and account=#{account} and is_valid='1'
+    </select>
+
+
+    <select id="getMobieUserByWeiXin" resultType="MobileUser">
+        select  id,xm as userName,account as accountId  from platform_mobile_user where 1=1
+        and weixin=#{weixin} and is_valid='1'
+    </select>
+
+    <select id="getMobieUserByQQ" resultType="MobileUser">
+        select  id,xm as userName,account as accountId  from platform_mobile_user where 1=1
+        and qq=#{qq} and is_valid='1'
+    </select>
+
+    <select id="getMobieUserByWeiBo" resultType="MobileUser">
+        select  id,xm as userName,account as accountId  from platform_mobile_user where 1=1
+        and weibo=#{weibo} and is_valid='1'
+    </select>
+
+    <select id="getMobieUserByTelPhone" resultType="MobileUser">
+        select  id,xm as userName,account as accountId,telphone  from platform_mobile_user where 1=1
+        and telphone=#{telphone} and is_valid='1'
+    </select>
+
+</mapper>

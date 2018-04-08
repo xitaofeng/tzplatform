@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.system.PlatFormTechSupportDao">
+
+    <select id="questionList" parameterType="PlatFormTechSupport" resultType="PlatFormTechSupport">
+        select t.* from platform_technicalsupport t left join platform_dict dict on t.questiontype = dict.type where 1=1
+        <if test="null != id and ''!= id">
+            and t.id=#{id}
+        </if>
+        <if test="null != question and ''!= question">
+            and t.question like '%'||#{question}||'%'
+        </if>
+        <if test="null != answer and ''!= answer">
+            and t.answer like '%'||#{answer}||'%'
+        </if>
+        <if test="null != questiontype and ''!= questiontype">
+            and t.questiontype=#{questiontype}
+        </if>
+        <if test="null != questionuser and ''!= questionuser">
+            and t.questionuser=#{questionuser}
+        </if>
+        order by t.createtime desc
+    </select>
+
+    <select id="questionListCount" parameterType="PlatFormTechSupport" resultType="int">
+        select count(t.id) from platform_technicalsupport t left join platform_dict dict on t.questiontype = dict.type
+        where 1=1
+        <if test="null != id and ''!= id">
+            and t.id=#{id}
+        </if>
+        <if test="null != question and ''!= question">
+            and t.question like '%'||#{question}||'%'
+        </if>
+        <if test="null != answer and ''!= answer">
+            and t.answer like '%'||#{answer}||'%'
+        </if>
+        <if test="null != questiontype and ''!= questiontype">
+            and t.questiontype=#{questiontype}
+        </if>
+        <if test="null != questionuser and ''!= questionuser">
+            and t.questionuser=#{questionuser}
+        </if>
+
+    </select>
+
+    <insert id="addQuestion" parameterType="PlatFormTechSupport">
+        insert into platform_technicalsupport
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != id and ''!= id">
+                id,
+            </if>
+            <if test="null != question and ''!= question">
+                question,
+            </if>
+            <if test="null != answer and ''!= answer">
+                answer,
+            </if>
+            <if test="null != createtime">
+                createtime,
+            </if>
+            <if test="null != questionuser and ''!= questionuser">
+                questionuser,
+            </if>
+            <if test="null != answeruser and ''!= answeruser">
+                answeruser,
+            </if>
+            <if test="null != questiontype and ''!= questiontype">
+                questiontype,
+            </if>
+            <if test="null != answertime">
+                answertime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=question and ''!=question">
+                #{question},
+            </if>
+            <if test="null !=answer and ''!=answer">
+                #{answer},
+            </if>
+            <if test="null !=createtime">
+                #{createtime},
+            </if>
+            <if test="null !=questionuser and ''!=questionuser">
+                #{questionuser},
+            </if>
+            <if test="null !=answeruser and ''!=answeruser">
+                #{answeruser},
+            </if>
+            <if test="null != questiontype and ''!= questiontype">
+                #{questiontype},
+            </if>
+            <if test="null !=answertime">
+                #{answertime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="editQuestion" parameterType="PlatFormTechSupport">
+        update platform_technicalsupport
+        <set>
+            <if test="null !=question and ''!=question">
+                question=#{question},
+            </if>
+            <if test="null !=answer and ''!=answer">
+                answer=#{answer},
+            </if>
+            <if test="null !=questionuser and ''!=questionuser">
+                questionuser=#{questionuser},
+            </if>
+            <if test="null !=answeruser and ''!=answeruser">
+                answeruser=#{answeruser},
+            </if>
+            <if test="null != questiontype and ''!= questiontype">
+                questiontype=#{questiontype},
+            </if>
+            <if test="null !=answertime">
+                answertime=#{answertime},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delQuestion">
+        delete from  platform_technicalsupport where id=#{id}
+    </delete>
+
+</mapper>

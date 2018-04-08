@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.webapp.PlatFormAppAccessCountDao">
+
+    <insert id="addAccessCount" parameterType="PlatFormAppAccessCount">
+        INSERT INTO platform_app_accesscount
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                id,
+            </if>
+            <if test="null !=appid and ''!=appid">
+                appid,
+            </if>
+            <if test="null !=accesscount and ''!=accesscount">
+                accesscount,
+            </if>
+            <if test="null !=startusetime">
+                startusetime,
+            </if>
+            <if test="null !=appsuitobj and ''!=appsuitobj">
+                appsuitobj,
+            </if>
+            <if test="null !=appsuiltxd and ''!=appsuiltxd">
+                appsuiltxd,
+            </if>
+            <if test="null !=introduce and ''!=introduce">
+                introduce,
+            </if>
+            <if test="null !=appstart and ''!=appstart">
+                appstart,
+            </if>
+            <if test="null !=collectcount and ''!=collectcount">
+                collectcount,
+            </if>
+            <if test="null !=defaultflag and ''!=defaultflag">
+                defaultflag
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                #{id},
+            </if>
+            <if test="null !=appid and ''!=appid">
+                #{appid},
+            </if>
+            <if test="null !=accesscount and ''!=accesscount">
+                #{accesscount},
+            </if>
+            <if test="null !=startusetime">
+                #{startusetime},
+            </if>
+            <if test="null !=appsuitobj and ''!=appsuitobj">
+                #{appsuitobj},
+            </if>
+            <if test="null !=appsuiltxd and ''!=appsuiltxd">
+                #{appsuiltxd},
+            </if>
+            <if test="null !=introduce and ''!=introduce">
+                #{introduce},
+            </if>
+            <if test="null !=appstart and ''!=appstart">
+                #{appstart},
+            </if>
+            <if test="null !=collectcount and ''!=collectcount">
+                #{collectcount},
+            </if>
+            <if test="null !=defaultflag and ''!=defaultflag">
+                #{defaultflag},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateAccessCount" parameterType="PlatFormAppAccessCount">
+        update platform_app_accesscount
+        <set>
+            <if test="null !=appid and ''!=appid">
+                appid=#{appid},
+            </if>
+            <if test="null !=accesscount and ''!=accesscount">
+                accesscount=#{accesscount},
+            </if>
+            <if test="null !=startusetime">
+                startusetime=#{startusetime},
+            </if>
+            <if test="null !=appsuitobj and ''!=appsuitobj">
+                appsuitobj=#{appsuitobj},
+            </if>
+            <if test="null !=appsuiltxd and ''!=appsuiltxd">
+                appsuiltxd=#{appsuiltxd},
+            </if>
+            <if test="null !=introduce and ''!=introduce">
+                introduce=#{introduce},
+            </if>
+            <if test="null !=appstart and ''!=appstart">
+                appstart=#{appstart},
+            </if>
+            <if test="null !=collectcount and ''!=collectcount">
+                collectcount=#{collectcount},
+            </if>
+            <if test="null !=defaultflag and ''!=defaultflag">
+                defaultflag=#{defaultflag},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="accessList" resultType="PlatFormAppAccessCount">
+        select * from platform_app_accesscount where appid=#{appid}
+    </select>
+
+    <update id="updateCollectCount" parameterType="java.lang.String">
+        update platform_app_accesscount count SET count.collectcount=nvl(count.collectcount,0)+1 WHERE appid=#{appid}
+    </update>
+
+    <update id="updateCollectCountCut" parameterType="java.lang.String">
+        update platform_app_accesscount count SET count.collectcount=count.collectcount-1 WHERE appid=#{appid}
+    </update>
+
+    <update id="updateUseCount" parameterType="java.lang.String">
+        update platform_app_accesscount count SET count.USEAPPCOUNT=nvl(count.USEAPPCOUNT,0)
+        <if test="null !=usecount">
+            + #{usecount}
+        </if>
+        WHERE appid=#{appid}
+    </update>
+
+    <select id="webappStatistics" parameterType="java.lang.String" resultType="java.util.LinkedHashMap">
+        select nvl(a.useappcount,0) as useappcount,nvl(a.collectcount,0) as collectcount,a.appid,b.webappname from
+        platform_app_accesscount a LEFT JOIN platform_webapplication b ON a.appid=b.id
+        WHERE b.webappstatus!='3'
+        <if test="null !=webappdevuser and ''!=webappdevuser">
+            AND b.webappdevuser=#{webappdevuser}
+        </if>
+        ORDER BY ${sortname} DESC nulls last
+    </select>
+    <select id="webappStatisticsCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) from platform_app_accesscount a LEFT JOIN platform_webapplication b ON a.appid=b.id
+        WHERE b.webappstatus!='3'
+        <if test="null !=webappdevuser and ''!=webappdevuser">
+            AND b.webappdevuser=#{webappdevuser}
+        </if>
+        ORDER BY ${sortname} DESC nulls last
+    </select>
+
+    <select id="webapptypeList" parameterType="java.lang.String" resultType="java.util.LinkedHashMap">
+        SELECT COUNT (*) as COUNT,a .WEBAPPKIND as WEBAPPKIND,b.VALUE as VALUE FROM PLATFORM_WEBAPPLICATION a LEFT JOIN
+        PLATFORM_DICT b ON a .WEBAPPKIND = b. NAME
+        WHERE a.webappstatus!='3'
+        <if test="null !=webappdevuser and ''!=webappdevuser">
+            AND a.webappdevuser=#{webappdevuser}
+        </if>
+        GROUP BY WEBAPPKIND,VALUE ORDER BY count DESC
+    </select>
+</mapper>

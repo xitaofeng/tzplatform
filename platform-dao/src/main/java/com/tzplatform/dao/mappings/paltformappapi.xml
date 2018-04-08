@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.system.PlatFormAppApiDao">
+
+    <insert id="addApiToApp">
+        INSERT INTO platform_app_api
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                id,
+            </if>
+            <if test="null !=apiid and ''!=apiid">
+                apiid,
+            </if>
+            <if test="null !=webappid and ''!=webappid">
+                webappid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                #{id},
+            </if>
+            <if test="null !=apiid and ''!=apiid">
+                #{apiid},
+            </if>
+            <if test="null !=webappid and ''!=webappid">
+                #{webappid},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delApiToApp">
+        delete from platform_app_api where webappid=#{webappid}
+    </delete>
+
+    <select id="getApiByApp" resultType="java.lang.String">
+        select apiid from platform_app_api where webappid=#{webappid}
+    </select>
+
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.mobileplatform.PlatformNoticeDao">
+
+    <insert id="addNotice">
+        INSERT  INTO platform_mobile_notice (
+        id,
+        title,
+        summary,
+        content,
+        status,
+        schoolId,
+        attachment,
+        attachmentPath
+        ) VALUES (
+        #{id},
+        #{title},
+        #{summary},
+        #{content},
+        #{status},
+        #{schoolId},
+        #{attachment},
+        #{attachmentPath}
+        )
+    </insert>
+
+    <select id="noticeDetail" resultType="NoticeModel">
+       select * from platform_mobile_notice  where  id = #{id}
+    </select>
+
+    <update id="release" >
+        update  platform_mobile_notice set status =#{status} , publish_time = #{publishDate}
+         where id=#{id}
+    </update>
+    <update id="noticeUpdate" >
+        update  platform_mobile_notice
+         set
+           status =#{status} ,
+           publish_time = #{publishDate},
+           title = #{title},
+           summary =#{summary},
+           content= #{content},
+           status =#{status},
+           schoolId=#{schoolId}
+    </update>
+
+
+
+
+    <select id="noticeList"  resultType="NoticeModel">
+        select * from platform_mobile_notice
+        <where>
+            <if test="null !=id and '' !=id">
+                and id=#{id}
+            </if>
+            <if test="null !=title and '' !=title">
+                and title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="null !=status and '' !=status">
+                and status=#{status}
+            </if>
+            <if test="null !=publishDate and '' !=publishDate">
+                and publish_time=#{publishDate}
+            </if>
+        </where>
+        order by status desc ,publish_time desc
+    </select>
+    <select id="noticeListCount"  resultType="int">
+        select count(*) from platform_mobile_notice
+        <where>
+            <if test="null !=id and '' !=id">
+                and id=#{id}
+            </if>
+            <if test="null !=title and '' !=title">
+                and title  like CONCAT('%',#{title},'%')
+            </if>
+            <if test="null !=status and '' !=status">
+                and status=#{status}
+            </if>
+            <if test="null !=publishDate and '' !=publishDate">
+                and publish_time=#{publishDate}
+            </if>
+        </where>
+    </select>
+
+
+
+
+</mapper>

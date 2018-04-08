@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.mobileplatform.PlatformCampusSceneryDao">
+
+    <insert id="addCampusSceneryType">
+        INSERT  INTO platform_campusScenery_type (
+        id,
+        type_name,
+        description,
+        image
+        ) VALUES (
+        #{id},
+        #{typeName},
+        #{description},
+        #{image}
+        )
+    </insert>
+    <select id="typeList"  resultType="CampusSceneryType">
+            select * from platform_campusScenery_type
+    </select>
+    <select id="typeListCount"  resultType="int">
+        select count(*) from platform_campusScenery_type
+    </select>
+
+    <select id="lostFoundDetail" resultType="LostFound">
+        select * from platform_lostfound
+         where id=#{id}
+    </select>
+
+    <insert id="addCampusScenery">
+         insert into platform_campusScenery
+             (
+                id,
+                image,
+                description,
+                place,
+                approve,
+                createtime,
+                createid,
+                updatetime,
+                updateId,
+                school_id,
+                type_id
+             )
+           VALUES
+          (
+                #{id},
+                #{image},
+                #{description},
+                #{place},
+                #{approve},
+                #{createTime},
+                #{createId},
+                #{updateTime},
+                #{updateId},
+                #{schoolId},
+                #{typeId}
+          )
+    </insert>
+
+    <select id="campusSceneryList"  resultType="CampusScenery">
+        select c.*, u.xm as createName, ru.xm as approveName, u.schoolname as schoolName
+            from platform_campusScenery c
+          left join platform_mobile_user u
+            on c.createid = u.account
+          left join Platform_Mobile_User ru
+             on c.updateid = ru.account
+          where 1=1
+            <if test="null != approve and ''!= approve">
+                and approve=#{approve}
+            </if>
+            <if test="null != typeId and ''!= typeId">
+                and type_id=#{typeId}
+            </if>
+            <if test="null != schoolId and ''!= schoolId">
+                and school_id=#{schoolId}
+            </if>
+            <if test="null != schoolName and ''!= schoolName">
+                and  u.schoolname like '%'||#{schoolName}||'%'
+            </if>
+        order by decode(c.approve, 2, 0, 1, 1,3,3) ,c.updatetime desc  nulls last,c.createtime desc
+
+    </select>
+    <select id="campusSceneryListCount"  resultType="int">
+        select count(*)
+        from platform_campusScenery c
+        left join platform_mobile_user u
+        on c.createid = u.account
+        left join Platform_Mobile_User ru
+        on c.updateid = ru.account
+        where 1=1
+        <if test="null != approve and ''!= approve">
+            and approve=#{approve}
+        </if>
+        <if test="null != typeId and ''!= typeId">
+            and type_id=#{typeId}
+        </if>
+        <if test="null != schoolId and ''!= schoolId">
+            and school_id=#{schoolId}
+        </if>
+        <if test="null != schoolName and ''!= schoolName">
+            and  u.schoolname like '%'||#{schoolName}||'%'
+        </if>
+        order by c.updatetime desc
+    </select>
+     <update id="approve">
+         update platform_campusScenery
+           set approve =#{approve},
+            updateTime=#{updateTime},
+            updateId=   #{updateId}
+          where id =#{id}
+     </update>
+    <delete id="delete">
+        delete  from platform_campusScenery where id  in
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

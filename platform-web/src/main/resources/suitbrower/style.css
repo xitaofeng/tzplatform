@@ -1,0 +1,51 @@
+.main-style {
+    width: 100%;
+    height: 1080px;
+    background-color: #0fb4f3;
+    overflow-y: hidden;
+  }
+  
+  body, div, p, h3, h1, dl, dt, dd, ul, ol, li {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  color: #555;
+}
+
+  .main-content {
+    width: 1300px;
+    height: 500px;
+    margin: 0 auto;
+    padding-top: 150px;
+
+  }
+
+  .main-title {
+    height: 100%;
+    border: 1px solid #32b1e2;
+    text-align: center;
+  }
+
+  .main-title p {
+    font-size: 15px;
+    color: white;
+  }
+
+  .main-title h1 {
+    font-size: 26px;
+    color: white;
+    padding-bottom: 30px;
+  }
+
+  .img-box {
+    width: 25%;
+    margin: 0;
+    text-align: center;
+    float: left;
+    padding-top: 50px;
+
+  }
+
+  .img-box img {
+    width: 20%;
+  }

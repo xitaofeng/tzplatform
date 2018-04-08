@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.webapp.PlatFormWebSchoolDao">
+
+    <insert id="addWebToSchool">
+        INSERT INTO platform_webapp_school
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                id,
+            </if>
+            <if test="null !=schoolid and ''!=schoolid">
+                schoolid,
+            </if>
+            <if test="null !=appid and ''!=appid">
+                appid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                #{id},
+            </if>
+            <if test="null !=schoolid and ''!=schoolid">
+                #{schoolid},
+            </if>
+            <if test="null !=appid and ''!=appid">
+                #{appid},
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delWebInSchool">
+        delete from platform_webapp_school where appid=#{appid}
+    </delete>
+
+    <select id="getSchoolByWeb" resultType="java.lang.String">
+        select schoolid from platform_webapp_school where appid=#{appid}
+    </select>
+
+    <select id="getSchoolTree" parameterType="java.lang.String" resultType="PlatFormSchool">
+        select a.id,a.xxmc from PLATFORM_SCHOOL a where a.id IN (SELECT b.schoolid from PLATFORM_WEBAPP_SCHOOL b where b.appid=#{appid})
+    </select>
+
+</mapper>

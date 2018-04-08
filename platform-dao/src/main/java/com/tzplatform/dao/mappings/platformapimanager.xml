@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.system.PlatFormApiManagerDao">
+    <insert id="addApi" parameterType="PlatFormApi">
+        INSERT INTO platform_apiinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                id,
+            </if>
+            <if test="null !=apittypeid and ''!=apittypeid">
+                apittypeid,
+            </if>
+            <if test="null!=apiname and ''!=apiname">
+                apiname,
+            </if>
+            <if test="null !=apiintrouduce and ''!=apiintrouduce">
+                apiintrouduce,
+            </if>
+            <if test="null !=apicondition and ''!=apicondition">
+                apicondition,
+            </if>
+            <if test="null !=apiurl and ''!=apiurl">
+                apiurl,
+            </if>
+            <if test="null !=apireqway and ''!=apireqway">
+                apireqway,
+            </if>
+            <if test="null !=apireqtype and ''!=apireqtype">
+                apireqtype,
+            </if>
+            <if test="null !=apiauth and ''!=apiauth">
+                apiauth,
+            </if>
+            <if test="null !=apireqnumner and ''!=apireqnumner">
+                apireqnumner,
+            </if>
+            <if test="null !=apireqparam and ''!=apireqparam">
+                apireqparam,
+            </if>
+            <if test="null !=apireqresult and ''!=apireqresult">
+                apireqresult,
+            </if>
+            <if test="null!=apireqexample and ''!=apireqexample">
+                apireqexample,
+            </if>
+            <if test="null !=apiaccessnumtoday and ''!=apiaccessnumtoday">
+                apiaccessnumtoday,
+            </if>
+            <if test="null!=apiaccessall and ''!=apiaccessall">
+                apiaccessall,
+            </if>
+            <if test="null!=createtime">
+                createtime,
+            </if>
+            <if test="null!=updatetime">
+                updatetime,
+            </if>
+            <if test="null!=handleuser and ''!=handleuser">
+                handleuser,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=apittypeid and ''!=apittypeid">
+                #{apittypeid},
+            </if>
+            <if test="null!=apiname and ''!=apiname">
+                #{apiname},
+            </if>
+            <if test="null !=apiintrouduce and ''!=apiintrouduce">
+                #{apiintrouduce},
+            </if>
+            <if test="null !=apicondition and ''!=apicondition">
+                #{apicondition},
+            </if>
+            <if test="null !=apiurl and ''!=apiurl">
+                #{apiurl},
+            </if>
+            <if test="null !=apireqway and ''!=apireqway">
+                #{apireqway},
+            </if>
+            <if test="null !=apireqtype and ''!=apireqtype">
+                #{apireqtype},
+            </if>
+            <if test="null !=apiauth and ''!=apiauth">
+                #{apiauth},
+            </if>
+            <if test="null !=apireqnumner and ''!=apireqnumner">
+                #{apireqnumner},
+            </if>
+            <if test="null !=apireqparam and ''!=apireqparam">
+                #{apireqparam},
+            </if>
+            <if test="null !=apireqresult and ''!=apireqresult">
+                #{apireqresult},
+            </if>
+            <if test="null!=apireqexample and ''!=apireqexample">
+                #{apireqexample},
+            </if>
+            <if test="null !=apiaccessnumtoday and ''!=apiaccessnumtoday">
+                #{apiaccessnumtoday},
+            </if>
+            <if test="null!=apiaccessall and ''!=apiaccessall">
+                #{apiaccessall},
+            </if>
+            <if test="null!=createtime">
+                #{createtime},
+            </if>
+            <if test="null!=updatetime">
+                #{updatetime},
+            </if>
+            <if test="null!=handleuser and ''!=handleuser">
+                #{handleuser},
+            </if>
+        </trim>
+    </insert>
+    <update id="editApi" parameterType="PlatFormApi">
+        UPDATE platform_apiinfo
+        <set>
+            <if test="null !=apittypeid and ''!=apittypeid">
+                apittypeid=#{apittypeid},
+            </if>
+            <if test="null!=apiname and ''!=apiname">
+                apiname=#{apiname},
+            </if>
+            <if test="null !=apiintrouduce and ''!=apiintrouduce">
+                apiintrouduce=#{apiintrouduce},
+            </if>
+            <if test="null !=apicondition and ''!=apicondition">
+                apicondition=#{apicondition},
+            </if>
+            <if test="null !=apiurl and ''!=apiurl">
+                apiurl=#{apiurl},
+            </if>
+            <if test="null !=apireqway and ''!=apireqway">
+                apireqway=#{apireqway},
+            </if>
+            <if test="null !=apireqtype and ''!=apireqtype">
+                apireqtype=#{apireqtype},
+            </if>
+            <if test="null !=apiauth and ''!=apiauth">
+                apiauth=#{apiauth},
+            </if>
+            <if test="null !=apireqnumner and ''!=apireqnumner">
+                apireqnumner=#{apireqnumner},
+            </if>
+            <if test="null !=apireqparam and ''!=apireqparam">
+                apireqparam=#{apireqparam},
+            </if>
+            <if test="null !=apireqresult and ''!=apireqresult">
+                apireqresult=#{apireqresult},
+            </if>
+            <if test="null!=apireqexample and ''!=apireqexample">
+                apireqexample=#{apireqexample},
+            </if>
+            <if test="null !=apiaccessnumtoday and ''!=apiaccessnumtoday">
+                apiaccessnumtoday=#{apiaccessnumtoday},
+            </if>
+            <if test="null!=apiaccessall and ''!=apiaccessall">
+                apiaccessall=#{apiaccessall},
+            </if>
+            <if test="null!=updatetime">
+                updatetime=#{updatetime},
+            </if>
+            <if test="null!=handleuser and ''!=handleuser">
+                handleuser=#{handleuser}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteApi">
+        delete from platform_apiinfo WHERE id=#{id}
+    </delete>
+    <select id="queryListCount" parameterType="PlatFormApi" resultType="int">
+        SELECT count(id) from platform_apiinfo WHERE 1=1
+        <if test="null!=id and ''!=id">
+            AND id=#{id}
+        </if>
+        <if test="null!=apittypeid and ''!=apittypeid">
+            AND apittypeid=#{apittypeid}
+        </if>
+        <if test="null!=apiname and ''!=apiname">
+            AND apiname LIKE '%'||#{apiname}||'%'
+        </if>
+    </select>
+    <select id="queryListApi" parameterType="PlatFormApi" resultType="PlatFormApi">
+        SELECT id,apittypeid,apiname,apiintrouduce,apicondition ,apiurl,apireqway,
+        apireqtype,apiauth, apireqnumner, apireqparam,apireqresult,apireqexample,apiaccessnumtoday ,apiaccessall from
+        platform_apiinfo WHERE 1=1
+        <if test="null!=id and ''!=id">
+            AND id=#{id}
+        </if>
+        <if test="null!=apittypeid and ''!=apittypeid">
+            AND apittypeid=#{apittypeid}
+        </if>
+        <if test="null!=apiname and ''!=apiname">
+            AND apiname LIKE '%'||#{apiname}||'%'
+        </if>
+    </select>
+
+    <select id="statisticsApi" resultType="java.util.HashMap">
+        SELECT count(a.APITTYPEID) as TYPENUM,b.TYPENAME from PLATFORM_APIINFO a LEFT JOIN PLATFORM_API_TYPE b on a.APITTYPEID=b."ID" GROUP BY a.APITTYPEID,b.TYPENAME ORDER BY a.APITTYPEID
+    </select>
+
+    <select id="queryApiManagerTree" resultType="PlatFormApi" parameterType="java.lang.String">
+        SELECT b.apiname,b.apittypeid,b.id from PLATFORM_APIINFO b where b.id in (SELECT a.apiid from PLATFORM_APP_API a where a.webappid=#{webappid})
+and b.apittypeid=#{apittypeid}
+
+    </select>
+</mapper>

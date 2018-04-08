@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.mobileplatform.PlatformLostFoundDao">
+
+    <insert id="addLostFound">
+        INSERT  INTO platform_lostfound (
+        id,
+        title,
+        content,
+        type,
+        place,
+        image,
+        createtime,
+        create_id,
+        schoolid
+        ) VALUES (
+        #{id},
+        #{title},
+        #{content},
+        #{type},
+        #{place},
+        #{image},
+        #{createTime},
+        #{createId},
+        #{schoolId}
+        )
+    </insert>
+    <select id="lostFoundList"  resultType="LostFound">
+        select o.*,u.xm as userName ,u.schoolname as schoolName from platform_lostfound o left join platform_mobile_user u on o.create_id= u.account
+
+        <where>
+            <if test="null !=id and '' !=id">
+                and o.id=#{id}
+            </if>
+            <if test=" null!=title and '' !=title">
+                and  o.title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="null !=schoolId and '' !=schoolId">
+                and o.schoolid=#{schoolId}
+            </if>
+            <if test="null !=createId and '' !=createId">
+                and o.create_id=#{createId}
+            </if>
+            <if test="null !=schoolName and '' !=schoolName">
+                and  u.schoolname like '%'||#{schoolName}||'%'
+            </if>
+            <if test="null !=type and '' !=type">
+                and  o.type =#{type}
+            </if>
+
+        </where>
+        order by o.createtime desc
+    </select>
+    <select id="lostFoundListCount"  resultType="int">
+        select count(1) from platform_lostfound o left join platform_mobile_user u on o.create_id= u.account
+        <where>
+            <if test="null !=id and '' !=id">
+                and o.id=#{id}
+            </if>
+            <if test=" null!=title and '' !=title">
+                and  o.title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="null !=schoolId and '' !=schoolId">
+                and o.schoolid=#{schoolId}
+            </if>
+            <if test="null !=createId and '' !=createId">
+                and o.create_id=#{createId}
+            </if>
+            <if test="null !=schoolName and '' !=schoolName">
+                and  u.schoolname like '%'||#{schoolName}||'%'
+            </if>
+            <if test="null !=type and '' !=type">
+                and  o.type =#{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="lostFoundDetail" resultType="LostFound">
+       select o.*,u.xm as userName ,u.schoolname as schoolName from platform_lostfound o left join platform_mobile_user u on o.create_id= u.account
+         where o.id=#{id}
+    </select>
+
+    <insert id="lostFoundReview">
+         insert into platform_lostfound_review
+             (
+                id,
+                lost_found_id,
+                 review,
+                 user_id,
+                 to_user_id,
+                 reply_time
+             )
+           VALUES
+          (
+                #{id},
+                #{lostFoundId},
+                 #{review},
+                 #{userId},
+                 #{toUserId},
+                 #{replyTime}
+          )
+    </insert>
+    <select id="reviewList"  resultType="LostFoundReview">
+        select
+            r.*,u.xm as userName, tu.xm as toUserName
+        from platform_lostfound_review r
+        left join platform_mobile_user u
+        on r.user_id = u.account
+        left join platform_mobile_user tu on r.to_user_id = tu.account
+        where lost_found_id =#{lostFoundId}
+        order by  r.reply_time desc
+    </select>
+    <select id="reviewListCount"  resultType="int">
+         select
+           count(*)
+        from platform_lostfound_review r
+        left join platform_mobile_user u
+        on r.user_id = u.account
+        left join platform_mobile_user tu on r.to_user_id = tu.account
+        where lost_found_id =#{lostFoundId}
+    </select>
+
+    <delete id="deleteLostFound">
+        delete  from platform_lostfound where id  in
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </delete>
+    <delete id="deleteReview">
+        delete  from platform_lostfound_review where id  in
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

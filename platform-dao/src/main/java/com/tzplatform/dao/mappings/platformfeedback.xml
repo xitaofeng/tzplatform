@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.mobileplatform.PlatformFeedBackDao">
+
+    <insert id="addfeedBackType">
+        INSERT  INTO platform_opinion_type (
+        id,
+        name,
+        description
+        ) VALUES (
+        #{id},
+        #{name},
+        #{description}
+        )
+    </insert>
+    <update id="updateFeedBackType" >
+        update  platform_opinion_type
+         set
+           name =#{name} ,
+           description = #{description}
+          where id =#{id}
+    </update>
+
+    <select id="feedBackTypeList"  resultType="FeedBackType">
+        select * from platform_opinion_type
+        <where>
+            <if test="null !=id and '' !=id">
+                and id=#{id}
+            </if>
+            <if test=" null!=description and '' !=description">
+                and description=#{description}
+            </if>
+            <if test="null !=name and '' !=name">
+                and name=#{name}
+            </if>
+        </where>
+    </select>
+    <select id="feedBackTypeListCount"  resultType="int">
+        select count(*) from platform_opinion_type
+        <where>
+            <if test="null !=id and '' !=id">
+                and id=#{id}
+            </if>
+            <if test=" null!=description and '' !=description">
+                and description=#{description}
+            </if>
+            <if test="null !=name and '' !=name">
+                and name=#{name}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addfeedBack">
+        INSERT  INTO platform_opinion (
+        id,
+        description,
+        opinion_type_id,
+        OPINIONTIME,
+        user_id,
+        schoolid,
+        imagepath,
+        status
+        ) VALUES (
+        #{id},
+        #{description},
+        #{opinionTypeId},
+        #{opinionTime},
+        #{userId},
+        #{schoolId},
+        #{imagePath},
+        #{status}
+        )
+    </insert>
+
+    <select id="feedBackList"  resultType="FeedBack">
+        select o.*,u.xm as userName,d.value as typeName,u.schoolname as schoolName from platform_opinion o left join platform_mobile_user u on o.user_id = u.account
+        left join platform_dict d on o.opinion_type_id = d.name and d.type='lostFoundType'
+        <where>
+            <if test="null !=id and '' !=id">
+                and o.id=#{id}
+            </if>
+            <if test=" null!=description and '' !=description">
+                and o.description like  '%'||#{description}||'%'
+            </if>
+            <if test=" null!=schoolId and '' !=schoolId">
+                and o.schoolId=#{schoolId}
+            </if>
+            <if test="null !=opinionTypeId and '' !=opinionTypeId">
+                and o.opinion_type_id=#{opinionTypeId}
+            </if>
+            <if test="null !=userId and '' !=userId">
+                and o.user_id=#{userId}
+            </if>
+            <if test="null !=schoolName and '' !=schoolName">
+                and  u.schoolname like '%'||#{schoolName}||'%'
+            </if>
+            <if test="null !=status and '' !=status">
+                and o.status=#{status}
+            </if>
+        </where>
+        order by o.opiniontime desc
+    </select>
+    <select id="feedBackCount"  resultType="int">
+        select count(1) from platform_opinion o left join platform_mobile_user u on o.user_id = u.account
+        left join platform_dict d on o.opinion_type_id = d.name and d.type='lostFoundType'
+        <where>
+            <if test="null !=id and '' !=id">
+                and o.id=#{id}
+            </if>
+            <if test=" null!=description and '' !=description">
+                and o.description like  '%'||#{description}||'%'
+            </if>
+            <if test=" null!=schoolId and '' !=schoolId">
+                and o.schoolId=#{schoolId}
+            </if>
+            <if test="null !=opinionTypeId and '' !=opinionTypeId">
+                and o.opinion_type_id=#{opinionTypeId}
+            </if>
+            <if test="null !=userId and '' !=userId">
+                and o.user_id=#{userId}
+            </if>
+            <if test="null !=schoolName and '' !=schoolName">
+                and  u.schoolname like '%'||#{schoolName}||'%'
+            </if>
+            <if test="null !=status and '' !=status">
+                and o.status=#{status}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteFeedBack">
+        delete  from platform_opinion where id  in
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <update id="updateStatus">
+        update platform_opinion set
+         status = #{status} ,
+         remark = #{remark}
+         where id = #{id}
+    </update>
+</mapper>

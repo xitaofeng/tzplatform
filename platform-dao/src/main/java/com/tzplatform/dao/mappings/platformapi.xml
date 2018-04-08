@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.system.PlatFormApiDao">
+    <insert id="addApi" parameterType="PlatFormApiType">
+        INSERT INTO platform_api_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                id,
+            </if>
+            <if test="null !=typename and ''!=typename">
+                typename,
+            </if>
+            <if test="null !=typecode and ''!=typecode">
+                typecode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and '' !=id">
+                #{id},
+            </if>
+            <if test="null !=typename and ''!=typename">
+                #{typename},
+            </if>
+            <if test="null !=typecode and ''!=typecode">
+                #{typecode},
+            </if>
+        </trim>
+    </insert>
+    <update id="editApi" parameterType="PlatFormApiType">
+        update platform_api_type
+        <set>
+            <if test="null !=typename and ''!=typename">
+                typename=#{typename},
+            </if>
+            <if test="null !=typecode and ''!=typecode">
+                typecode=#{typecode}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteApi">
+        delete from platform_api_type where id=#{id}
+    </delete>
+    <select id="queryListCount" parameterType="PlatFormApiType" resultType="int">
+        select count(id) from platform_api_type where 1=1
+        <if test="null !=id and ''!=id">
+            and id=#{id}
+        </if>
+        <if test="null !=typename and ''!=typename">
+            and typename like '%'||#{typename}||'%'
+        </if>
+        <if test="null !=typecode and ''!=typecode">
+            and typecode=#{typecode}
+        </if>
+    </select>
+    <select id="queryListApi" parameterType="PlatFormApiType" resultType="PlatFormApiType">
+        select id,typename,typecode from platform_api_type where 1=1
+        <if test="null !=id and ''!=id">
+            and id=#{id}
+        </if>
+        <if test="null !=typename and ''!=typename">
+            and typename like '%'||#{typename}||'%'
+        </if>
+        <if test="null !=typecode and ''!=typecode">
+            and typecode=#{typecode}
+        </if>
+        <if test="null !=sortOrder and ''!=sortOrder">
+            ORDER BY ${sortOrder}
+        </if>
+        <if test="null !=sortName and ''!=sortName">
+            ${sortName}
+        </if>
+    </select>
+    <select id="queryApiTree" parameterType="java.lang.String" resultType="PlatFormApiType">
+        SELECT a.id,a.typename,a.typecode from platform_api_type a WHERE a.id in
+        (SELECT b.apiid from platform_app_api b WHERE b.webappid=#{webappid})
+    </select>
+</mapper>

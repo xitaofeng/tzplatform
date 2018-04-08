@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.system.PlatFormRoleDao">
+
+
+    <select id="listRole" parameterType="PlatFormRole" resultType="PlatFormRole">
+        select id,rolename,rolecode,rolestate,roletype from platform_role where 1=1
+        <if test="null != id and ''!= id">
+            and id=#{id}
+        </if>
+        <if test="null != rolename and ''!= rolename">
+            and rolename like '%'||#{rolename}||'%'
+        </if>
+        <if test="null != rolecode and ''!= rolecode">
+            and rolecode=#{rolecode}
+        </if>
+        <if test="null != rolestate and ''!= rolestate">
+            and rolestate=#{rolestate}
+        </if>
+        <if test="null != roletype and ''!= roletype">
+            and roletype=#{roletype}
+        </if>
+    </select>
+
+    <select id="listRoleCount" parameterType="PlatFormRole" resultType="int">
+        select count(id) from platform_role where 1=1
+        <if test="null != id and ''!= id">
+            and id=#{id}
+        </if>
+        <if test="null != rolename and ''!= rolename">
+            and rolename like '%'||#{rolename}||'%'
+        </if>
+        <if test="null != rolecode and ''!= rolecode">
+            and rolecode=#{rolecode}
+        </if>
+        <if test="null != rolestate and ''!= rolestate">
+            and rolestate=#{rolestate}
+        </if>
+        <if test="null != roletype and ''!= roletype">
+            and roletype=#{roletype}
+        </if>
+    </select>
+
+    <insert id="addRole" parameterType="PlatFormRole">
+        insert into platform_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null != id and ''!= id">
+                id,
+            </if>
+            <if test="null != rolename and ''!= rolename">
+                rolename,
+            </if>
+            <if test="null != rolecode and ''!= rolecode">
+                rolecode,
+            </if>
+            <if test="null != rolestate and ''!= rolestate">
+                rolestate,
+            </if>
+            <if test="null != roletype and ''!= roletype">
+                roletype,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=rolename and ''!=rolename">
+                #{rolename},
+            </if>
+            <if test="null !=rolecode and ''!=rolecode">
+                #{rolecode},
+            </if>
+            <if test="null !=rolestate and ''!=rolestate">
+                #{rolestate},
+            </if>
+            <if test="null !=roletype and ''!=roletype">
+                #{roletype},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="editRole" parameterType="PlatFormRole">
+        update platform_role
+        <set>
+            <if test=" rolename !='' and rolename != null ">
+                rolename=#{rolename},
+            </if>
+            <if test=" rolecode !='' and rolecode != null ">
+                rolecode=#{rolecode},
+            </if>
+            <if test=" rolestate !='' and rolestate != null ">
+                rolestate=#{rolestate},
+            </if>
+            <if test=" roletype !='' and roletype != null ">
+                roletype=#{roletype},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delRole">
+        delete from  platform_role where id=#{id}
+    </delete>
+
+
+</mapper>

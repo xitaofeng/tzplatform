@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzplatform.dao.system.PlatFormLogDao">
+    <insert id="insertExceptionLog" parameterType="PlatFormExceptionLog">
+        INSERT INTO platform_systemerrorlog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                id,
+            </if>
+            <if test="null !=handleaccount and ''!=handleaccount">
+                handleaccount,
+            </if>
+            <if test="null !=handleip and ''!=handleip">
+                handleip,
+            </if>
+            <if test="null !=applicationname and ''!=applicationname">
+                applicationname,
+            </if>
+            <if test="null !=menuname and ''!=menuname">
+                menuname,
+            </if>
+            <if test="null !=description and ''!=description">
+                description,
+            </if>
+            <if test="null !=methodname and ''!=methodname">
+                methodname,
+            </if>
+            <if test="null !=errorinfo and ''!=errorinfo">
+                errorinfo,
+            </if>
+            <if test="null !=createtime">
+                createtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=handleaccount and ''!=handleaccount">
+                #{handleaccount},
+            </if>
+            <if test="null !=handleip and ''!=handleip">
+                #{handleip},
+            </if>
+            <if test="null !=applicationname and ''!=applicationname">
+                #{applicationname},
+            </if>
+            <if test="null !=menuname and ''!=menuname">
+                #{menuname},
+            </if>
+            <if test="null !=description and ''!=description">
+                #{description},
+            </if>
+            <if test="null !=methodname and ''!=methodname">
+                #{methodname},
+            </if>
+            <if test="null !=errorinfo and ''!=errorinfo">
+                #{errorinfo},
+            </if>
+            <if test="null !=createtime">
+                #{createtime},
+            </if>
+        </trim>
+    </insert>
+    <insert id="inserNormalLog" parameterType="PlatFormNormalLog">
+        INSERT INTO platform_handlelog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                id,
+            </if>
+            <if test="null !=handleaccount and ''!=handleaccount">
+                handleaccount,
+            </if>
+            <if test="null !=handlename and ''!=handlename">
+                handlename,
+            </if>
+            <if test="null !=handlemenu and ''!=handlemenu">
+                handlemenu,
+            </if>
+            <if test="null !=handlepoint and ''!=handlepoint">
+                handlepoint,
+            </if>
+            <if test="null !=handledescription and ''!=handledescription">
+                handledescription,
+            </if>
+            <if test="null !=handleresult and ''!=handleresult">
+                handleresult,
+            </if>
+            <if test="null !=handletime">
+                handletime,
+            </if>
+            <if test="null !=createtime">
+                createtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="null !=id and ''!=id">
+                #{id},
+            </if>
+            <if test="null !=handleaccount and ''!=handleaccount">
+                #{handleaccount},
+            </if>
+            <if test="null !=handlename and ''!=handlename">
+                #{handlename},
+            </if>
+            <if test="null !=handlemenu and ''!=handlemenu">
+                #{handlemenu},
+            </if>
+            <if test="null !=handlepoint and ''!=handlepoint">
+                #{handlepoint},
+            </if>
+            <if test="null !=handledescription and ''!=handledescription">
+                #{handledescription},
+            </if>
+            <if test="null !=handleresult and ''!=handleresult">
+                #{handleresult},
+            </if>
+            <if test="null !=handletime">
+                #{handletime},
+            </if>
+            <if test="null !=createtime">
+                #{createtime},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="querynormalLogCount" parameterType="PlatFormNormalLog" resultType="int">
+        SELECT count(*) from platform_handlelog a left join platform_users_view b ON a.HANDLEACCOUNT=b.account WHERE 1=1
+        <if test="null !=id and ''!=id">
+            AND a.id=#{id}
+        </if>
+        <if test="null !=handleaccount and ''!=handleaccount">
+            AND a.handleaccount like '%'||#{handleaccount}||'%'
+        </if>
+        <if test="null !=handlename and ''!=handlename">
+            AND a.handlename=#{handlename}
+        </if>
+        <if test="null !=handlemenu and ''!=handlemenu">
+            AND a.handlemenu like '%'||#{handlemenu}||'%'
+        </if>
+        <if test="null !=handledescription and ''!=handledescription">
+            AND a.handledescription like '%'||#{handledescription}||'%'
+        </if>
+        <if test="null !=handleresult and ''!=handleresult">
+            AND a.handleresult=#{handleresult}
+        </if>
+        <if test="null !=handlepoint and ''!=handlepoint">
+            AND a.handlepoint=#{handlepoint}
+        </if>
+        <if test="null !=account and ''!=account">
+            AND b.account like '%'||#{account}||'%'
+        </if>
+    </select>
+    <resultMap id="PlatFormNormalLogMap" type="PlatFormNormalLog">
+        <result property="id" column="id"></result>
+        <result property="handleaccount" column="handleaccount"></result>
+        <result property="account" column="account"></result>
+        <result property="name" column="name"></result>
+        <result property="handlename" column="handlename"></result>
+        <result property="handlemenu" column="handlemenu"></result>
+        <result property="handlepoint" column="handlepoint"></result>
+        <result property="handledescription" column="handledescription"></result>
+        <result property="handleresult" column="handleresult"></result>
+        <result property="handletime" column="handletime" jdbcType="TIMESTAMP"></result>
+        <result property="createtime" column="createtime" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+    <select id="querynormalLog" parameterType="PlatFormNormalLog" resultMap="PlatFormNormalLogMap">
+        SELECT a.id,handleaccount,handlename,handlemenu,handlepoint,handledescription,handleresult,handletime,createtime,b.account as account,b.name as name
+        FROM platform_handlelog a LEFT JOIN platform_users_view b ON a.HANDLEACCOUNT=b.account WHERE 1=1
+        <if test="null !=id and ''!=id">
+            AND a.id=#{id}
+        </if>
+        <if test="null !=handleaccount and ''!=handleaccount">
+            AND a.handleaccount like '%'||#{handleaccount}||'%'
+        </if>
+        <if test="null !=handlename and ''!=handlename">
+            AND a.handlename=#{handlename}
+        </if>
+        <if test="null !=handlemenu and ''!=handlemenu">
+            AND a.handlemenu like '%'||#{handlemenu}||'%'
+        </if>
+        <if test="null !=handledescription and ''!=handledescription">
+            AND a.handledescription like '%'||#{handledescription}||'%'
+        </if>
+        <if test="null !=handleresult and ''!=handleresult">
+            AND a.handleresult=#{handleresult}
+        </if>
+        <if test="null !=handlepoint and ''!=handlepoint">
+            AND a.handlepoint=#{handlepoint}
+        </if>
+        <if test="null !=account and ''!=account">
+            AND b.account like '%'||#{account}||'%'
+        </if>
+        ORDER BY handletime DESC
+    </select>
+    <select id="queryexceptionCount" parameterType="PlatFormExceptionLog" resultType="int">
+        SELECT COUNT(*) FROM platform_systemerrorlog a LEFT JOIN platform_users_view b ON a.HANDLEACCOUNT=b.account WHERE 1=1
+        <if test="null !=id and ''!=id">
+            AND a.id=#{id}
+        </if>
+        <if test="null !=handleaccount and ''!=handleaccount">
+            AND a.handleaccount  like '%'||#{handleaccount}||'%'
+        </if>
+        <if test="null !=handleip and ''!=handleip">
+            AND a.handleip=#{handleip}
+        </if>
+        <if test="null !=menuname and ''!=menuname">
+            AND a.menuname like '%'||#{menuname}||'%'
+        </if>
+        <if test="null !=description and ''!=description">
+            AND a.description like '%'||#{description}||'%'
+        </if>
+        <if test="null !=methodname and ''!=methodname">
+            AND a.methodname=#{methodname}
+        </if>
+        <if test="null !=account and ''!=account">
+            AND b.account like '%'||#{account}||'%'
+        </if>
+    </select>
+    <resultMap id="PlatFormExceptionLogMap" type="PlatFormExceptionLog">
+        <result property="id" column="id"></result>
+        <result property="handleaccount" column="handleaccount"></result>
+        <result property="account" column="account"></result>
+        <result property="name" column="name"></result>
+        <result property="handleip" column="handleip"></result>
+        <result property="applicationname" column="applicationname"></result>
+        <result property="menuname" column="menuname"></result>
+        <result property="description" column="description"></result>
+        <result property="methodname" column="methodname"></result>
+        <result property="errorinfo" column="errorinfo"></result>
+        <result property="createtime" column="createtime" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+    <select id="queryexceptionLog" parameterType="PlatFormExceptionLog" resultMap="PlatFormExceptionLogMap">
+        SELECT a.id as id,handleaccount,handleip,applicationname,menuname,description,methodname,errorinfo,createtime,b.account as account,b.name as name
+        FROM platform_systemerrorlog a LEFT JOIN platform_users_view b ON a.HANDLEACCOUNT=b.account WHERE 1=1
+        <if test="null !=id and ''!=id">
+            AND a.id=#{id}
+        </if>
+        <if test="null !=handleaccount and ''!=handleaccount">
+            AND a.handleaccount  like '%'||#{handleaccount}||'%'
+        </if>
+        <if test="null !=handleip and ''!=handleip">
+            AND a.handleip=#{handleip}
+        </if>
+        <if test="null !=menuname and ''!=menuname">
+            AND a.menuname like '%'||#{menuname}||'%'
+        </if>
+        <if test="null !=description and ''!=description">
+            AND a.description like '%'||#{description}||'%'
+        </if>
+        <if test="null !=methodname and ''!=methodname">
+            AND a.methodname=#{methodname}
+        </if>
+        <if test="null !=account and ''!=account">
+            AND b.account like '%'||#{account}||'%'
+        </if>
+        ORDER BY createtime DESC
+    </select>
+
+    <select id="queryIdByAccount" resultType="PlatFormNormalLog" parameterType="java.lang.String">
+        SELECT * from platform_users_view where account=#{account}
+    </select>
+</mapper>
